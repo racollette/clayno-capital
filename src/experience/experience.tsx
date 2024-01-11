@@ -2,28 +2,26 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import {
   Environment,
-  MeshPortalMaterial,
+  // MeshPortalMaterial,
   // Float,
   // useMatcapTexture,
   // Center,
   // Text3D,
   // Text,
   OrbitControls,
-  PerspectiveCamera,
-  RoundedBox,
+  // PerspectiveCamera,
+  // RoundedBox,
   // ContactShadows,
   // MeshReflectorMaterial,
   // PerspectiveCamera,
   useGLTF,
   useTexture,
-  PresentationControls,
+  // PresentationControls,
 } from "@react-three/drei";
-import { useControls, folder } from "leva";
+// import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
 import * as THREE from "three";
-import Model from "./clayno-ntf-model";
-import waterVertexShader from "./shaders/water/vertex.glsl";
-import waterFragmentShader from "./shaders/water/fragment.glsl";
+// import Model from "./clayno-ntf-model";
 
 // const Moat = () => {
 //   return (
@@ -231,15 +229,15 @@ const waterMaterial = {
 
 export default function Experience1() {
   // const bridgeRef = useRef<THREE.Object3D | null>(null);
-  const { position } = useControls("ocean", {
-    position: {
-      value: { x: 0, z: 0 },
-      step: 0.01,
-      min: 0,
-      max: 10,
-      joystick: "invertY",
-    },
-  });
+  // const { position } = useControls("ocean", {
+  //   position: {
+  //     value: { x: 0, z: 0 },
+  //     step: 0.01,
+  //     min: 0,
+  //     max: 10,
+  //     joystick: "invertY",
+  //   },
+  // });
 
   const terrain = useGLTF("./models/terrain.glb");
   const terrainTexture = useTexture("./textures/terrain_texture.jpg");
@@ -248,8 +246,8 @@ export default function Experience1() {
   const volcanoTexture = useTexture("./textures/volcano_texture.jpg");
   volcanoTexture.flipY = false;
 
-  console.log(terrain);
-  console.log(terrainTexture);
+  // console.log(terrain);
+  // console.log(terrainTexture);
 
   // terrain.traverse((child) => {
   //   if (child instanceof THREE.Mesh) {
@@ -262,9 +260,12 @@ export default function Experience1() {
   //   "./textures/Fantasy_equirectangular-jpg_Subterranean_citadel_in_VR360_1873830655_9870915.jpg"
   // );
   // const oceanGeometry = new THREE.CircleGeometry(100, 64);
-  const oceanRef = useRef<THREE.Mesh | null>(null);
+  const oceanRef = useRef<THREE.Mesh<
+    THREE.PlaneGeometry,
+    THREE.ShaderMaterial
+  > | null>(null);
   const timeRef = useRef(0);
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     timeRef.current += delta;
     if (oceanRef.current) {
       oceanRef.current.material.uniforms.uTime.value = timeRef.current;
@@ -300,12 +301,15 @@ export default function Experience1() {
         </mesh> */}
 
       {/* <primitive object={terrain} position={[0, 0, 0]} scale={1} /> */}
-      <mesh geometry={terrain.scene.children[0].geometry} position={[0, 0, 0]}>
+      <mesh
+        geometry={(terrain.scene.children[0] as THREE.Mesh).geometry}
+        position={[0, 0, 0]}
+      >
         <meshStandardMaterial map={terrainTexture} map-flipY={false} />
       </mesh>
 
       <mesh
-        geometry={volcano.scene.children[0].geometry}
+        geometry={(volcano.scene.children[0] as THREE.Mesh).geometry}
         position={[-0.9, 0, -5]}
       >
         <meshStandardMaterial map={volcanoTexture} map-flipY={false} />
