@@ -2,15 +2,15 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import {
   Environment,
-  // MeshPortalMaterial,
+  MeshPortalMaterial,
   // Float,
   // useMatcapTexture,
   // Center,
-  // Text3D,
+  Text3D,
   // Text,
   OrbitControls,
   // PerspectiveCamera,
-  // RoundedBox,
+  RoundedBox,
   // ContactShadows,
   // MeshReflectorMaterial,
   // PerspectiveCamera,
@@ -21,6 +21,8 @@ import {
 // import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
 import * as THREE from "three";
+import Model from "./clayno-ntf-model";
+import { useControls } from "leva";
 // import Model from "./clayno-ntf-model";
 
 // const Moat = () => {
@@ -241,13 +243,13 @@ export default function Experience1() {
 
   const terrain = useGLTF("./models/terrain.glb");
   const terrainTexture = useTexture("./textures/terrain_texture.jpg");
+  terrainTexture.flipY = false;
 
   const volcano = useGLTF("./models/volcano.glb");
   const volcanoTexture = useTexture("./textures/volcano_texture.jpg");
   volcanoTexture.flipY = false;
 
-  // console.log(terrain);
-  // console.log(terrainTexture);
+  const yingyang = useGLTF("./models/yingyang.glb");
 
   // terrain.traverse((child) => {
   //   if (child instanceof THREE.Mesh) {
@@ -256,34 +258,91 @@ export default function Experience1() {
   //   }
   // });
 
-  // const map = useTexture(
-  //   "./textures/Fantasy_equirectangular-jpg_Subterranean_citadel_in_VR360_1873830655_9870915.jpg"
-  // );
+  const map = useTexture(
+    "./textures/Fantasy_equirectangular-jpg_Subterranean_citadel_in_VR360_1873830655_9870915.jpg"
+  );
   // const oceanGeometry = new THREE.CircleGeometry(100, 64);
   const oceanRef = useRef<THREE.Mesh<
     THREE.PlaneGeometry,
     THREE.ShaderMaterial
   > | null>(null);
+
+  const stegoRef = useRef<THREE.Group | null>(null);
+
+  const boxControls = useControls("box", {
+    position: {
+      value: { x: -0.81, y: 1.5, z: 1.63 },
+      step: 0.01,
+    },
+    rotation: {
+      value: { x: -0.28, y: -0.45, z: -0.13 },
+      step: 0.01,
+    },
+    args: {
+      value: [1.17, 1.33, 0.0],
+      step: 0.01,
+    },
+  });
+
+  const stegoControls = useControls("stego", {
+    position: {
+      value: { x: 4.49, y: 1.2, z: 5.13 },
+      step: 0.01,
+    },
+    rotation: {
+      value: { x: -0.28, y: -0.45, z: -0.13 },
+      step: 0.01,
+    },
+  });
+
+  const center = new THREE.Vector3(
+    stegoControls.position.x + 0.85,
+    stegoControls.position.y,
+    stegoControls.position.z + 0.85
+  );
+
   const timeRef = useRef(0);
   useFrame((_state, delta) => {
     timeRef.current += delta;
     if (oceanRef.current) {
       oceanRef.current.material.uniforms.uTime.value = timeRef.current;
     }
+
+    if (stegoRef.current) {
+      // Adjust the radius and speed based on your requirements
+      const radius = 0.85;
+      const speed = 0.5;
+
+      // Calculate new position
+      const x =
+        radius * Math.cos(speed * timeRef.current) + stegoControls.position.x;
+      const z =
+        radius * Math.sin(speed * timeRef.current) + stegoControls.position.z;
+
+      // Set the new position
+      // console.log(stegoRef.current.position);
+      stegoRef.current.position.z = z;
+      stegoRef.current.position.x = x;
+
+      stegoRef.current.lookAt(center);
+
+      // Rotate around the center of the circle
+      // stegoRef.current.rotation.y += 0.01;
+    }
   });
 
   return (
     <>
-      {/* <ambientLight intensity={} /> */}
-      {/* <pointLight position={[10, 10, 10]} /> */}
+      <ambientLight intensity={5} />
+      <pointLight position={[2, 1, -6]} intensity={50} />
       <OrbitControls />
 
       <Environment
-        preset="city"
+        preset="sunset"
         // background
         // ground
         // files="./environments/kloofendal_overcast_puresky_2k.hdr"
-        // files="./textures/Fantasy_equirectangular-jpg_VR360_view_of_molten_670336408_9869197.jpg"
+        // files="./environments/Fantasy_equirectangular-jpg_VR360_view_of_molten_670336408_9869197.jpg"
       />
 
       {/* <PresentationControls
@@ -300,20 +359,66 @@ export default function Experience1() {
           <meshStandardMaterial map={map} side={THREE.BackSide} />
         </mesh> */}
 
-      {/* <primitive object={terrain} position={[0, 0, 0]} scale={1} /> */}
-      <mesh
-        geometry={(terrain.scene.children[0] as THREE.Mesh).geometry}
-        position={[0, 0, 0]}
+      {/* Watching Bronto */}
+      <group
+        position={[-5.9, 1.97, -2.56]}
+        // ref={stegoRef}
+        rotation-y={Math.PI / 1}
+        scale={0.6}
       >
-        <meshStandardMaterial map={terrainTexture} map-flipY={false} />
-      </mesh>
+        <Model modelName="bronto-idle-bored" nftId="8006" />
+      </group>
 
-      <mesh
-        geometry={(volcano.scene.children[0] as THREE.Mesh).geometry}
-        position={[-0.9, 0, -5]}
+      {/* Running Stego */}
+      <group
+        position={[
+          stegoControls.position.x,
+          stegoControls.position.y,
+          stegoControls.position.z,
+        ]}
+        ref={stegoRef}
+        rotation={[
+          stegoControls.rotation.x,
+          stegoControls.rotation.y,
+          stegoControls.rotation.z,
+        ]}
+        scale={0.35}
       >
-        <meshStandardMaterial map={volcanoTexture} map-flipY={false} />
-      </mesh>
+        <Model modelName="stego-trot-excited" nftId="5592" />
+      </group>
+
+      {/* <mesh scale={0.4} position={[yingyangX, 0, yingyangZ]}>
+        <boxGeometry />
+        <meshBasicMaterial color="red" />
+      </mesh> */}
+
+      <group rotation-y={Math.PI}>
+        <mesh
+          geometry={(terrain.scene.children[0] as THREE.Mesh).geometry}
+          position={[0, 0, 0]}
+          scale={1.5}
+          rotation={[0, Math.PI * 1.5, 0]}
+        >
+          <meshStandardMaterial map={terrainTexture} map-flipY={false} />
+        </mesh>
+
+        <mesh
+          geometry={(volcano.scene.children[0] as THREE.Mesh).geometry}
+          position={[0, 0.55, 0]}
+          rotation={[0, Math.PI * 0.3, 0]}
+        >
+          <meshStandardMaterial map={volcanoTexture} map-flipY={false} />
+        </mesh>
+      </group>
+
+      {/* <mesh
+        geometry={(yingyang.scene.children[0] as THREE.Mesh).geometry}
+        position={[0, 4, 0]}
+      > */}
+      {/* <meshStandardMaterial map={yingyangTexture} map-flipY={false} /> */}
+      {/* </mesh> */}
+
+      {/* <primitive object={yingyang.scene} position={[0, 4, 5]} /> */}
 
       {/* <mesh
         geometry={terrain.scene.children[1].geometry}
@@ -322,26 +427,34 @@ export default function Experience1() {
         <meshStandardMaterial map={terrainTexture} map-flipY={false} />
       </mesh> */}
 
-      {/* <RoundedBox
-          args={[10, 14, 0.1]}
-          position={[-15, 7, 15]}
-          rotation={[0, -Math.PI / 4, 0]}
-        > */}
-      {/* <MeshPortalMaterial side={THREE.DoubleSide}> */}
-      {/* <ambientLight intensity={0.75} /> */}
-      {/* <Environment preset="sunset" /> */}
-      {/* <Model modelName="rex-walk-happy" nftId="6721" /> */}
-      {/* <mesh rotation={[0, Math.PI / 2, 0]}> */}
-      {/* <sphereGeometry args={[9, 64, 64]} /> */}
-      {/* <meshStandardMaterial map={map} side={THREE.BackSide} /> */}
-      {/* </mesh> */}
-      {/* </MeshPortalMaterial> */}
-      {/* </RoundedBox> */}
+      <RoundedBox
+        args={boxControls.args}
+        position={[
+          boxControls.position.x,
+          boxControls.position.y,
+          boxControls.position.z,
+        ]}
+        rotation={[
+          boxControls.rotation.x,
+          boxControls.rotation.y,
+          boxControls.rotation.z,
+        ]}
+      >
+        <MeshPortalMaterial side={THREE.DoubleSide}>
+          <ambientLight intensity={0.75} />
+          <Environment preset="sunset" />
+          {/* <Model modelName="rex-walk-happy" nftId="6721" /> */}
+          <mesh rotation={[0, Math.PI / 2, 0]}>
+            <sphereGeometry args={[1, 64, 64]} />
+            <meshStandardMaterial map={map} side={THREE.BackSide} />
+          </mesh>
+        </MeshPortalMaterial>
+      </RoundedBox>
 
       <mesh
         // geometry={oceanGeometry}
         ref={oceanRef}
-        position={[0, 0, -4]}
+        position={[0, -0.5, -4]}
         rotation={[-Math.PI * 0.5, 0, 0]}
         scale={1}
       >
@@ -367,10 +480,9 @@ export default function Experience1() {
         scale={15}
       /> */}
       {/* <primitive object={castleDoor} position={[0, 1, -4]} scale={0.75} /> */}
-      {/* <Center>
-        <Text3D font="./fonts/Claynotopia_Regular.json">Hello Clayno</Text3D>
-        </Center>
-      */}
+      <Text3D position={[-5, 6, -5]} font="./fonts/Titan_One_Regular.json">
+        THE CAPITAL
+      </Text3D>
     </>
   );
 }
