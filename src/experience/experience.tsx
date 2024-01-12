@@ -249,7 +249,7 @@ export default function Experience1() {
   const volcanoTexture = useTexture("./textures/volcano_texture.jpg");
   volcanoTexture.flipY = false;
 
-  const yingyang = useGLTF("./models/yingyang.glb");
+  // const yingyang = useGLTF("./models/yingyang.glb");
 
   // terrain.traverse((child) => {
   //   if (child instanceof THREE.Mesh) {

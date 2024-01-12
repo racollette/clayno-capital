@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGLTF, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useEffect, useState } from "react";
@@ -30,6 +31,7 @@ export default function Model({ modelName, nftId }: any) {
   const [textureParamsShaderB, setTextureParamsShaderB] = useState<any>(null);
 
   const loadTexture = (url: string) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const texture = useTexture(url);
     texture.flipY = false;
 
