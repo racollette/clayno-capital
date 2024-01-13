@@ -16,7 +16,7 @@ import {
   // PerspectiveCamera,
   useGLTF,
   useTexture,
-  // PresentationControls,
+  PresentationControls,
 } from "@react-three/drei";
 // import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
@@ -348,9 +348,14 @@ export default function Experience1() {
 
   return (
     <>
-      <ambientLight intensity={2} />
+      <ambientLight intensity={0} />
       {/* <pointLight position={[2, 1, -6]} intensity={50} /> */}
-      <OrbitControls />
+      <OrbitControls
+        maxDistance={50}
+        minDistance={15}
+        maxPolarAngle={1.4}
+        minPolarAngle={0.1}
+      />
 
       <Environment
         preset="sunset"
@@ -359,20 +364,6 @@ export default function Experience1() {
         // files="./environments/kloofendal_overcast_puresky_2k.hdr"
         // files="./environments/Fantasy_equirectangular-jpg_VR360_view_of_molten_670336408_9869197.jpg"
       />
-
-      {/* <PresentationControls
-        global
-        rotation={[0.3, -0.8, 0]}
-        polar={[0, Math.PI / 2]}
-        azimuth={[9, 100]}
-        // config={{ mass: 2, tension: 400 }}
-        // snap={{ mass: 4, tension: 400 }}
-      > */}
-      {/* <group position={[50, -20, 20]}> */}
-      {/* <mesh>
-          <sphereGeometry args={[100, 64, 64]} />
-          <meshStandardMaterial map={map} side={THREE.BackSide} />
-        </mesh> */}
 
       {/* Watching Bronto */}
       <group
@@ -450,22 +441,6 @@ export default function Experience1() {
         </group>
       </group>
 
-      {/* <mesh
-        geometry={(yingyang.scene.children[0] as THREE.Mesh).geometry}
-        position={[0, 4, 0]}
-      > */}
-      {/* <meshStandardMaterial map={yingyangTexture} map-flipY={false} /> */}
-      {/* </mesh> */}
-
-      {/* <primitive object={yingyang.scene} position={[0, 4, 5]} /> */}
-
-      {/* <mesh
-        geometry={terrain.scene.children[1].geometry}
-        position={[0.9, 0, 5.3]}
-      >
-        <meshStandardMaterial map={terrainTexture} map-flipY={false} />
-      </mesh> */}
-
       <RoundedBox
         args={boxControls.args}
         position={[0, -2, 0]}
@@ -489,7 +464,7 @@ export default function Experience1() {
         rotation={[-Math.PI * 0.5, 0, 0]}
         scale={1}
       >
-        <planeGeometry args={[30, 30, 512, 512]} />
+        <planeGeometry args={[60, 60, 512, 512]} />
 
         <shaderMaterial
           attach="material"
@@ -498,20 +473,12 @@ export default function Experience1() {
         />
       </mesh>
       {/* </group> */}
-      {/* </PresentationControls> */}
-      {/* <mesh position={[0, 0, 0]} rotation={[-Math.PI * 0.5, 0, 0]} scale={10}>
-        <planeGeometry />
-        <meshStandardMaterial color="blue" />
-      </mesh> */}
-      {/* <primitive
-        object={bridge}
-        ref={bridgeRef}
-        rotation={[0, Math.PI * 0.5, 0]}
-        position={[position.x, 0, position.z]}
-        scale={15}
-      /> */}
-      {/* <primitive object={castleDoor} position={[0, 1, -4]} scale={0.75} /> */}
-      <Text3D position={[-5, 6, -5]} font="./fonts/Titan_One_Regular.json">
+
+      <Text3D
+        position={[3, 7, -4]}
+        rotation={[0, -0.4, 0]}
+        font="./fonts/Titan_One_Regular.json"
+      >
         THE CAPITAL
       </Text3D>
     </>
