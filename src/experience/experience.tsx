@@ -241,13 +241,17 @@ export default function Experience1() {
   //   },
   // });
 
-  const terrain = useGLTF("./models/terrain.glb");
-  const terrainTexture = useTexture("./textures/terrain_texture.jpg");
+  const terrain = useGLTF("./models/terrain1.glb");
+  const terrainTexture = useTexture("./textures/terrain_texture1.jpg");
   terrainTexture.flipY = false;
 
-  const volcano = useGLTF("./models/volcano.glb");
-  const volcanoTexture = useTexture("./textures/volcano_texture.jpg");
+  const volcano = useGLTF("./models/volcano1.glb");
+  const volcanoTexture = useTexture("./textures/volcano_texture1.jpg");
   volcanoTexture.flipY = false;
+
+  const stairs = useGLTF("./models/stairs.glb");
+  const stairsTexture = useTexture("./textures/stairs_texture.jpg");
+  stairsTexture.flipY = false;
 
   // const yingyang = useGLTF("./models/yingyang.glb");
 
@@ -295,6 +299,17 @@ export default function Experience1() {
     },
   });
 
+  const stairControls = useControls("stairs", {
+    position: {
+      value: { x: 0.44, y: 1.57, z: 0.14 },
+      step: 0.01,
+    },
+    rotation: {
+      value: { x: 1.61, y: -0.92, z: -0.49 },
+      step: 0.01,
+    },
+  });
+
   const center = new THREE.Vector3(
     stegoControls.position.x + 0.85,
     stegoControls.position.y,
@@ -333,8 +348,8 @@ export default function Experience1() {
 
   return (
     <>
-      <ambientLight intensity={5} />
-      <pointLight position={[2, 1, -6]} intensity={50} />
+      <ambientLight intensity={2} />
+      {/* <pointLight position={[2, 1, -6]} intensity={50} /> */}
       <OrbitControls />
 
       <Environment
@@ -392,23 +407,47 @@ export default function Experience1() {
         <meshBasicMaterial color="red" />
       </mesh> */}
 
-      <group rotation-y={Math.PI}>
-        <mesh
-          geometry={(terrain.scene.children[0] as THREE.Mesh).geometry}
-          position={[0, 0, 0]}
-          scale={1.5}
-          rotation={[0, Math.PI * 1.5, 0]}
-        >
-          <meshStandardMaterial map={terrainTexture} map-flipY={false} />
-        </mesh>
+      <group position={[0, 0, 0]}>
+        {/* Terrain */}
+        <group rotation-y={Math.PI}>
+          <mesh
+            geometry={(terrain.scene.children[0] as THREE.Mesh).geometry}
+            position={[-1, 0, -2.5]}
+            scale={1.5}
+            rotation={[0, Math.PI * 1.5, 0]}
+          >
+            <meshStandardMaterial map={terrainTexture} map-flipY={false} />
+          </mesh>
+        </group>
 
-        <mesh
-          geometry={(volcano.scene.children[0] as THREE.Mesh).geometry}
-          position={[0, 0.55, 0]}
-          rotation={[0, Math.PI * 0.3, 0]}
-        >
-          <meshStandardMaterial map={volcanoTexture} map-flipY={false} />
-        </mesh>
+        <group scale={1.6}>
+          {/* Volcano */}
+          <mesh
+            geometry={(volcano.scene.children[0] as THREE.Mesh).geometry}
+            position={[-0.9, 0.32, -0.63]}
+            rotation={[0.23, 4.97, 0.2]}
+          >
+            <meshStandardMaterial map={volcanoTexture} map-flipY={false} />
+          </mesh>
+          {/* Arch */}
+          <mesh
+            geometry={(stairs.scene.children[0] as THREE.Mesh).geometry}
+            position={[-0.55, -2.01, -0.08]}
+            rotation={[1.61, 0.92, -0.49]}
+            scale={1.1}
+          >
+            <meshStandardMaterial map={stairsTexture} map-flipY={false} />
+          </mesh>
+          {/* Stairs */}
+          <mesh
+            geometry={(stairs.scene.children[1] as THREE.Mesh).geometry}
+            position={[1.34, -0.34, 4.95]}
+            rotation={[-0.03, -1.21, 0.05]}
+            scale={1.1}
+          >
+            <meshStandardMaterial map={stairsTexture} map-flipY={false} />
+          </mesh>
+        </group>
       </group>
 
       {/* <mesh
@@ -429,16 +468,8 @@ export default function Experience1() {
 
       <RoundedBox
         args={boxControls.args}
-        position={[
-          boxControls.position.x,
-          boxControls.position.y,
-          boxControls.position.z,
-        ]}
-        rotation={[
-          boxControls.rotation.x,
-          boxControls.rotation.y,
-          boxControls.rotation.z,
-        ]}
+        position={[0, -2, 0]}
+        rotation={[1.61, 0.92, -0.49]}
       >
         <MeshPortalMaterial side={THREE.DoubleSide}>
           <ambientLight intensity={0.75} />
@@ -454,7 +485,7 @@ export default function Experience1() {
       <mesh
         // geometry={oceanGeometry}
         ref={oceanRef}
-        position={[0, -0.5, -4]}
+        position={[1, -1, 1]}
         rotation={[-Math.PI * 0.5, 0, 0]}
         scale={1}
       >
