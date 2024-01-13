@@ -16,62 +16,12 @@ import {
   // PerspectiveCamera,
   useGLTF,
   useTexture,
-  PresentationControls,
 } from "@react-three/drei";
 // import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import Model from "./clayno-ntf-model";
 import { useControls } from "leva";
-// import Model from "./clayno-ntf-model";
-
-// const Moat = () => {
-//   return (
-//     <mesh position={[0, -1, 0]}>
-//       <sphereGeometry args={[6, 32, 32]} />
-//       <meshStandardMaterial color="blue" />
-//     </mesh>
-//   );
-// };
-
-// const Castle = () => {
-//   return (
-//     <mesh position={[0, 0, 0]}>
-//       <boxGeometry args={[3, 3, 3]} />
-//       <meshStandardMaterial color="gray" />
-//     </mesh>
-//   );
-// };
-
-// const Portcullis = () => {
-//   return (
-//     <mesh position={[0, -1.5, 1.5]}>
-//       <boxGeometry args={[2.5, 2, 0.1]} />
-//       <meshStandardMaterial color="darkgray" />
-//     </mesh>
-//   );
-// };
-
-// const CustomBridge = () => {
-//   const curve = new THREE.Shape();
-//   curve.moveTo(-5, 0);
-//   curve.quadraticCurveTo(0, 2, 2, 0); // Example quadratic curve
-
-//   const extrudeSettings = {
-//     steps: 100,
-//     bevelEnabled: false,
-//     depth: 1, // Depth of the bridge
-//   };
-
-//   const geometry = new THREE.ExtrudeGeometry(curve, extrudeSettings);
-
-//   return (
-//     <mesh position={[0, -1, 0]}>
-//       <bufferGeometry attach="geometry" {...geometry} />
-//       <meshStandardMaterial color="orange" />
-//     </mesh>
-//   );
-// };
 
 const waterMaterial = {
   vertexShader: `uniform float uTime;
@@ -227,20 +177,7 @@ const waterMaterial = {
   },
 };
 
-// Define Leva controls for the shader uniforms
-
 export default function Experience1() {
-  // const bridgeRef = useRef<THREE.Object3D | null>(null);
-  // const { position } = useControls("ocean", {
-  //   position: {
-  //     value: { x: 0, z: 0 },
-  //     step: 0.01,
-  //     min: 0,
-  //     max: 10,
-  //     joystick: "invertY",
-  //   },
-  // });
-
   const terrain = useGLTF("./models/terrain1.glb");
   const terrainTexture = useTexture("./textures/terrain_texture1.jpg");
   terrainTexture.flipY = false;
@@ -255,17 +192,9 @@ export default function Experience1() {
 
   // const yingyang = useGLTF("./models/yingyang.glb");
 
-  // terrain.traverse((child) => {
-  //   if (child instanceof THREE.Mesh) {
-  //     // Apply the texture to the mesh
-  //     child.material = new THREE.MeshStandardMaterial({ map: terrainTexture });
-  //   }
-  // });
-
   const map = useTexture(
     "./textures/Fantasy_equirectangular-jpg_Subterranean_citadel_in_VR360_1873830655_9870915.jpg"
   );
-  // const oceanGeometry = new THREE.CircleGeometry(100, 64);
   const oceanRef = useRef<THREE.Mesh<
     THREE.PlaneGeometry,
     THREE.ShaderMaterial
@@ -299,17 +228,6 @@ export default function Experience1() {
     },
   });
 
-  const stairControls = useControls("stairs", {
-    position: {
-      value: { x: 0.44, y: 1.57, z: 0.14 },
-      step: 0.01,
-    },
-    rotation: {
-      value: { x: 1.61, y: -0.92, z: -0.49 },
-      step: 0.01,
-    },
-  });
-
   const center = new THREE.Vector3(
     stegoControls.position.x + 0.85,
     stegoControls.position.y,
@@ -335,14 +253,10 @@ export default function Experience1() {
         radius * Math.sin(speed * timeRef.current) + stegoControls.position.z;
 
       // Set the new position
-      // console.log(stegoRef.current.position);
       stegoRef.current.position.z = z;
       stegoRef.current.position.x = x;
 
       stegoRef.current.lookAt(center);
-
-      // Rotate around the center of the circle
-      // stegoRef.current.rotation.y += 0.01;
     }
   });
 
@@ -392,11 +306,6 @@ export default function Experience1() {
       >
         <Model modelName="stego-trot-excited" nftId="5592" />
       </group>
-
-      {/* <mesh scale={0.4} position={[yingyangX, 0, yingyangZ]}>
-        <boxGeometry />
-        <meshBasicMaterial color="red" />
-      </mesh> */}
 
       <group position={[0, 0, 0]}>
         {/* Terrain */}
@@ -449,7 +358,6 @@ export default function Experience1() {
         <MeshPortalMaterial side={THREE.DoubleSide}>
           <ambientLight intensity={0.75} />
           <Environment preset="sunset" />
-          {/* <Model modelName="rex-walk-happy" nftId="6721" /> */}
           <mesh rotation={[0, Math.PI / 2, 0]}>
             <sphereGeometry args={[1, 64, 64]} />
             <meshStandardMaterial map={map} side={THREE.BackSide} />
@@ -458,7 +366,6 @@ export default function Experience1() {
       </RoundedBox>
 
       <mesh
-        // geometry={oceanGeometry}
         ref={oceanRef}
         position={[1, -1, 1]}
         rotation={[-Math.PI * 0.5, 0, 0]}
@@ -466,13 +373,8 @@ export default function Experience1() {
       >
         <planeGeometry args={[60, 60, 512, 512]} />
 
-        <shaderMaterial
-          attach="material"
-          args={[waterMaterial]}
-          // uniforms-resolution-value={[100, 100]}
-        />
+        <shaderMaterial attach="material" args={[waterMaterial]} />
       </mesh>
-      {/* </group> */}
 
       <Text3D
         position={[3, 7, -4]}
