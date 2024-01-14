@@ -18,8 +18,8 @@ export default function Model({ modelName, nftId }: any) {
 
   const { scene, animations } = useGLTF(externalURL);
 
-  console.log(scene);
-  console.log(animations);
+  // console.log(scene);
+  // console.log(animations);
 
   const meshRef = useRef<Group | null>(null);
   const [mixer] = useState(() => new AnimationMixer(scene));

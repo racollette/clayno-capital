@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import {
   Environment,
@@ -18,7 +18,7 @@ import {
   useTexture,
 } from "@react-three/drei";
 // import { useControls } from "leva";
-// import { Perf } from "r3f-perf";
+import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import Model from "./clayno-ntf-model";
 import { useControls } from "leva";
@@ -181,6 +181,7 @@ export default function Experience1() {
   const terrain = useGLTF("./models/terrain1.glb");
   const terrainTexture = useTexture("./textures/terrain_texture1.jpg");
   terrainTexture.flipY = false;
+  // terrain.scene.children[0].position.x = 5;
 
   const volcano = useGLTF("./models/volcano1.glb");
   const volcanoTexture = useTexture("./textures/volcano_texture1.jpg");
@@ -190,10 +191,14 @@ export default function Experience1() {
   const stairsTexture = useTexture("./textures/stairs_texture.jpg");
   stairsTexture.flipY = false;
 
+  // const yang = useGLTF("./models/yang.glb");
+  // const yangTexture = useTexture("./textures/yang_texture.jpg");
+  // yangTexture.flipY = false;
+
   // const yingyang = useGLTF("./models/yingyang.glb");
 
   const map = useTexture(
-    "./textures/Fantasy_equirectangular-jpg_Subterranean_citadel_in_VR360_1873830655_9870915.jpg"
+    "./textures/Dreamlike_equirectangular-jpg_Subterranean_city_active_volcano_1969036910_9914188.jpg"
   );
   const oceanRef = useRef<THREE.Mesh<
     THREE.PlaneGeometry,
@@ -201,74 +206,123 @@ export default function Experience1() {
   > | null>(null);
 
   const stegoRef = useRef<THREE.Group | null>(null);
+  const ankyloRef = useRef<THREE.Group | null>(null);
+  const terrainRef = useRef<THREE.Mesh | null>(null);
 
   const boxControls = useControls("box", {
     position: {
-      value: { x: -0.81, y: 1.5, z: 1.63 },
+      value: { x: 0.29, y: 1.6, z: 1.86 },
       step: 0.01,
     },
     rotation: {
-      value: { x: -0.28, y: -0.45, z: -0.13 },
+      value: { x: -0.42, y: 6.62, z: 0.13 },
       step: 0.01,
     },
     args: {
-      value: [1.17, 1.33, 0.0],
+      value: [2.3, 1.84, 0.0],
       step: 0.01,
     },
   });
 
   const stegoControls = useControls("stego", {
     position: {
-      value: { x: 4.49, y: 1.2, z: 5.13 },
+      value: { x: 6.17, y: 4.35, z: 11.21 },
       step: 0.01,
     },
     rotation: {
-      value: { x: -0.28, y: -0.45, z: -0.13 },
+      value: { x: 0, y: 6, z: 0 },
       step: 0.01,
     },
   });
 
-  const center = new THREE.Vector3(
-    stegoControls.position.x + 0.85,
-    stegoControls.position.y,
-    stegoControls.position.z + 0.85
-  );
+  const stegoRaycaster = new THREE.Raycaster();
+  const ankyloRaycaster = new THREE.Raycaster();
+  const groundRay = new THREE.Vector3(0, -1, 0); // Ray pointing down for terrain intersection
+  const stegoHeight = 1.65;
+  const ankyloHeight = 1.65;
+  const stegoTransform = { x: 4.75, y: stegoHeight, z: 4 };
+  const ankyloTransform = { x: 5.5, y: ankyloHeight, z: 5.9 };
+  const center = new THREE.Vector3(5, 1, 4.8);
 
+  const radius = 1.4;
+  const speed = 1;
   const timeRef = useRef(0);
   useFrame((_state, delta) => {
     timeRef.current += delta;
+
     if (oceanRef.current) {
       oceanRef.current.material.uniforms.uTime.value = timeRef.current;
     }
 
-    if (stegoRef.current) {
-      // Adjust the radius and speed based on your requirements
-      const radius = 0.85;
-      const speed = 0.5;
+    if (stegoRef.current && ankyloRef.current && terrainRef.current) {
+      // Calculate new positions for stego and ankylo
+      const x = radius * Math.cos(speed * timeRef.current) + radius / 2;
+      const z = radius * Math.sin(speed * timeRef.current) + radius / 2;
 
-      // Calculate new position
-      const x =
-        radius * Math.cos(speed * timeRef.current) + stegoControls.position.x;
-      const z =
-        radius * Math.sin(speed * timeRef.current) + stegoControls.position.z;
-
-      // Set the new position
-      stegoRef.current.position.z = z;
-      stegoRef.current.position.x = x;
-
+      // Set the new positions for stego
+      stegoRef.current.position.z = z + stegoTransform.z;
+      stegoRef.current.position.x = x + stegoTransform.x;
       stegoRef.current.lookAt(center);
+
+      // Set the new positions for ankylo on the opposite side
+      ankyloRef.current.position.z = -z + ankyloTransform.z;
+      ankyloRef.current.position.x = -x + ankyloTransform.x;
+      ankyloRef.current.lookAt(center);
+
+      // Raycasting for terrain intersection
+      const stegoRay = new THREE.Vector3(
+        stegoRef.current.position.x,
+        stegoRef.current.position.y,
+        stegoRef.current.position.z
+      );
+
+      const ankyloRay = new THREE.Vector3(
+        ankyloRef.current.position.x,
+        ankyloRef.current.position.y,
+        ankyloRef.current.position.z
+      );
+
+      stegoRaycaster.set(stegoRay, groundRay);
+      ankyloRaycaster.set(ankyloRay, groundRay);
+
+      // const stegoIntersections = stegoRaycaster.intersectObject(
+      //   terrainRef.current,
+      //   true
+      // );
+
+      // const ankyloIntersections = ankyloRaycaster.intersectObject(
+      //   terrainRef.current,
+      //   true
+      // );
+
+      // if (stegoIntersections.length > 0) {
+      //   stegoRef.current.position.y =
+      //     stegoIntersections[0].point.y + stegoTransform.y;
+      //   console.log(`Stego Y position set to ${stegoRef.current.position.y}`);
+      // }
+
+      // if (ankyloIntersections.length > 0) {
+      //   ankyloRef.current.position.y =
+      //     ankyloIntersections[0].point.y + ankyloTransform.y;
+      //   console.log(`Ankylo Y position set to ${ankyloRef.current.position.y}`);
+      // }
     }
+  });
+
+  const { perfVisible } = useControls({
+    perfVisible: false,
   });
 
   return (
     <>
-      <ambientLight intensity={0} />
+      {perfVisible && <Perf position="top-left" />}
+      <ambientLight intensity={1} />
       {/* <pointLight position={[2, 1, -6]} intensity={50} /> */}
       <OrbitControls
-        maxDistance={50}
-        minDistance={15}
-        maxPolarAngle={1.4}
-        minPolarAngle={0.1}
+      // maxDistance={50}
+      // minDistance={15}
+      // maxPolarAngle={1.4}
+      // minPolarAngle={0.1}
       />
 
       <Environment
@@ -279,49 +333,61 @@ export default function Experience1() {
         // files="./environments/Fantasy_equirectangular-jpg_VR360_view_of_molten_670336408_9869197.jpg"
       />
 
+      {/* <mesh ref={planeRef} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[20, 20]} />
+        <meshStandardMaterial color="red" />
+      </mesh> */}
+
+      {/* <mesh position={[5, 2, 5]} scale={0.5}>
+        <boxGeometry />
+        <meshStandardMaterial color="green" />
+      </mesh> */}
+
       {/* Watching Bronto */}
-      <group
-        position={[-5.9, 1.97, -2.56]}
-        // ref={stegoRef}
-        rotation-y={Math.PI / 1}
-        scale={0.6}
-      >
-        <Model modelName="bronto-idle-bored" nftId="8006" />
-      </group>
-
-      {/* Running Stego */}
-      <group
-        position={[
-          stegoControls.position.x,
-          stegoControls.position.y,
-          stegoControls.position.z,
-        ]}
-        ref={stegoRef}
-        rotation={[
-          stegoControls.rotation.x,
-          stegoControls.rotation.y,
-          stegoControls.rotation.z,
-        ]}
-        scale={0.35}
-      >
-        <Model modelName="stego-trot-excited" nftId="5592" />
-      </group>
-
-      <group position={[0, 0, 0]}>
-        {/* Terrain */}
-        <group rotation-y={Math.PI}>
-          <mesh
-            geometry={(terrain.scene.children[0] as THREE.Mesh).geometry}
-            position={[-1, 0, -2.5]}
-            scale={1.5}
-            rotation={[0, Math.PI * 1.5, 0]}
-          >
-            <meshStandardMaterial map={terrainTexture} map-flipY={false} />
-          </mesh>
+      <group>
+        <group
+          // ref={stegoRef}
+          scale={1.5}
+          position={[5.5, 2.65, 5]}
+        >
+          <Model modelName="bronto-idle-bored" nftId="8006" />
         </group>
 
-        <group scale={1.6}>
-          {/* Volcano */}
+        {/* Running Stego */}
+        <group
+          ref={stegoRef}
+          // position={[8.5, 6, 10.5]}
+          rotation={[
+            stegoControls.rotation.x,
+            stegoControls.rotation.y,
+            stegoControls.rotation.z,
+          ]}
+          scale={0.8}
+        >
+          <Model modelName="stego-trot-excited" nftId="5592" />
+        </group>
+        <group ref={ankyloRef} scale={0.8}>
+          <Model modelName="ankylo-gallop-excited" nftId="5708" />
+        </group>
+      </group>
+
+      {/* <mesh position={[8.8, 0, 10.4]} scale={0.3}>
+        <boxGeometry />
+        <meshStandardMaterial color="red" />
+      </mesh> */}
+
+      <group>
+        {/* Terrain */}
+
+        <mesh
+          ref={terrainRef}
+          geometry={(terrain.scene.children[0] as THREE.Mesh).geometry}
+          rotation={[0, Math.PI, 0]}
+        >
+          <meshStandardMaterial map={terrainTexture} map-flipY={false} />
+        </mesh>
+
+        <group position={[-1, 0, -2]}>
           <mesh
             geometry={(volcano.scene.children[0] as THREE.Mesh).geometry}
             position={[-0.9, 0.32, -0.63]}
@@ -329,7 +395,6 @@ export default function Experience1() {
           >
             <meshStandardMaterial map={volcanoTexture} map-flipY={false} />
           </mesh>
-          {/* Arch */}
           <mesh
             geometry={(stairs.scene.children[0] as THREE.Mesh).geometry}
             position={[-0.55, -2.01, -0.08]}
@@ -338,7 +403,6 @@ export default function Experience1() {
           >
             <meshStandardMaterial map={stairsTexture} map-flipY={false} />
           </mesh>
-          {/* Stairs */}
           <mesh
             geometry={(stairs.scene.children[1] as THREE.Mesh).geometry}
             position={[1.34, -0.34, 4.95]}
@@ -347,34 +411,36 @@ export default function Experience1() {
           >
             <meshStandardMaterial map={stairsTexture} map-flipY={false} />
           </mesh>
+          <RoundedBox
+            args={boxControls.args}
+            position={[
+              boxControls.position.x,
+              boxControls.position.y,
+              boxControls.position.z,
+            ]}
+            rotation={[
+              boxControls.rotation.x,
+              boxControls.rotation.y,
+              boxControls.rotation.z,
+            ]}
+          >
+            <MeshPortalMaterial side={THREE.DoubleSide}>
+              <ambientLight intensity={0.75} />
+              <Environment preset="sunset" />
+              <mesh rotation={[0, Math.PI / 2, 0]} position={[0, 1, 0]}>
+                <sphereGeometry args={[2.2, 64, 64]} />
+                <meshStandardMaterial map={map} side={THREE.BackSide} />
+              </mesh>
+            </MeshPortalMaterial>
+          </RoundedBox>
         </group>
       </group>
 
-      <RoundedBox
-        args={boxControls.args}
-        position={[0, -2, 0]}
-        rotation={[1.61, 0.92, -0.49]}
-      >
-        <MeshPortalMaterial side={THREE.DoubleSide}>
-          <ambientLight intensity={0.75} />
-          <Environment preset="sunset" />
-          <mesh rotation={[0, Math.PI / 2, 0]}>
-            <sphereGeometry args={[1, 64, 64]} />
-            <meshStandardMaterial map={map} side={THREE.BackSide} />
-          </mesh>
-        </MeshPortalMaterial>
-      </RoundedBox>
-
-      <mesh
-        ref={oceanRef}
-        position={[1, -1, 1]}
-        rotation={[-Math.PI * 0.5, 0, 0]}
-        scale={1}
-      >
+      {/* <mesh ref={oceanRef} rotation={[-Math.PI * 0.5, 0, 0]} scale={1}>
         <planeGeometry args={[60, 60, 512, 512]} />
 
         <shaderMaterial attach="material" args={[waterMaterial]} />
-      </mesh>
+      </mesh> */}
 
       <Text3D
         position={[3, 7, -4]}
