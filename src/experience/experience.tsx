@@ -18,10 +18,10 @@ import {
   useTexture,
 } from "@react-three/drei";
 // import { useControls } from "leva";
-import { Perf } from "r3f-perf";
+// import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import Model from "./clayno-ntf-model";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 import GuardRex from "../components/GuardRex";
 
 const waterMaterial = {

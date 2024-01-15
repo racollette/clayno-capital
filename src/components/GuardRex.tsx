@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useRef, useState } from "react";
+// import { useFrame } from "@react-three/fiber";
 import {
-  Html,
+  // Html,
   useGLTF,
   useCursor,
   Text3D,
@@ -20,9 +20,9 @@ const ClickableMesh = () => {
 
   // Update the mesh rotation in the animation loop
 
-  const handleClick = (event) => {
-    console.log("clicked");
-  };
+  // const handleClick = (event) => {
+  //   console.log("clicked");
+  // };
 
   return (
     <group
@@ -30,7 +30,7 @@ const ClickableMesh = () => {
       scale={0.9}
       position={[-1.7, 2.4, 1.35]}
       rotation={[0, 0.2, 0]}
-      onClick={handleClick}
+      // onClick={handleClick}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
