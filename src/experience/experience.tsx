@@ -17,6 +17,8 @@ import {
   useGLTF,
   useTexture,
   useMatcapTexture,
+  Stars,
+  Sky,
 } from "@react-three/drei";
 // import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
@@ -300,7 +302,21 @@ export default function Experience1() {
         minPolarAngle={0.1}
         target={[0, 0, 0]}
       />
-
+      <Stars
+        radius={100}
+        depth={50}
+        count={5000}
+        factor={7}
+        saturation={0}
+        fade
+        speed={1.5}
+      />
+      {/* <Sky
+        distance={450000}
+        sunPosition={[0, 1, 0]}
+        inclination={0}
+        azimuth={0.25}
+      /> */}
       <Environment
         preset="sunset"
         // background
