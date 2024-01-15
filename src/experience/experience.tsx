@@ -22,6 +22,7 @@ import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import Model from "./clayno-ntf-model";
 import { useControls } from "leva";
+import GuardRex from "../components/GuardRex";
 
 const waterMaterial = {
   vertexShader: `uniform float uTime;
@@ -204,6 +205,17 @@ export default function Experience1() {
   //   },
   // });
 
+  // const tridentControls = useControls("trident", {
+  //   position: {
+  //     value: { x: 0.2, y: -1.5, z: 0.2 },
+  //     step: 0.01,
+  //   },
+  //   rotation: {
+  //     value: { x: 0, y: 0.8, z: 0 },
+  //     step: 0.01,
+  //   },
+  // });
+
   const terrain = useGLTF("./models/terrain1.glb");
   const terrainTexture = useTexture("./textures/terrain_texture1.jpg");
   terrainTexture.flipY = false;
@@ -218,7 +230,7 @@ export default function Experience1() {
   stairsTexture.flipY = false;
 
   const map = useTexture(
-    "./textures/Dreamlike_equirectangular-jpg_Subterranean_city_active_volcano_1969036910_9914188.jpg"
+    "./textures/Dreamlike_equirectangular-jpg_Subterranean_city_active_volcano_1969036910_9914188-min.jpg"
   );
   const oceanRef = useRef<THREE.Mesh<
     THREE.PlaneGeometry,
@@ -270,7 +282,7 @@ export default function Experience1() {
 
   return (
     <>
-      {/* {perfVisible && <Perf position="top-left" />} */}
+      {/* <Perf position="top-left" /> */}
       <ambientLight intensity={1} />
       {/* <pointLight position={[2, 1, -6]} intensity={50} /> */}
       <OrbitControls
@@ -301,9 +313,8 @@ export default function Experience1() {
 
       <group>
         {/* Guard Rex */}
-        <group scale={0.9} position={[-1.7, 2.4, 1.35]} rotation={[0, 0.3, 0]}>
-          <Model modelName="rex-idle-confident" nftId="6069" />
-        </group>
+        <GuardRex />
+
         {/* Lookout Bronto */}
         <group scale={1.5} position={[5.5, 2.65, 5]}>
           <Model modelName="bronto-idle-bored" nftId="8006" />
@@ -362,8 +373,8 @@ export default function Experience1() {
             position={[0.29, 1.6, 1.86]}
             rotation={[-0.42, 6.62, 0.13]}
           >
-            <MeshPortalMaterial side={THREE.DoubleSide}>
-              <ambientLight intensity={0.75} />
+            <MeshPortalMaterial>
+              <ambientLight intensity={0} />
               <Environment preset="sunset" />
               <mesh rotation={[0, Math.PI / 2, 0]} position={[0, 1, 0]}>
                 <sphereGeometry args={[2.2, 64, 64]} />
