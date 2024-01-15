@@ -16,6 +16,7 @@ import {
   // PerspectiveCamera,
   useGLTF,
   useTexture,
+  useMatcapTexture,
 } from "@react-three/drei";
 // import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
@@ -216,6 +217,13 @@ export default function Experience1() {
   //   },
   // });
 
+  const [matcapTexture] = useMatcapTexture("593E2C_E5D8A9_BC9F79_9F8A68", 256);
+
+  // 63584B_E6E0D6_A8A092_BFB6A8
+  //
+  // C8D1DC_575B62_818892_6E747B
+  // C7C7D7_4C4E5A_818393_6C6C74
+
   const terrain = useGLTF("./models/terrain1.glb");
   const terrainTexture = useTexture("./textures/terrain_texture1.jpg");
   terrainTexture.flipY = false;
@@ -358,7 +366,8 @@ export default function Experience1() {
             rotation={[1.61, 0.92, -0.49]}
             scale={1.1}
           >
-            <meshStandardMaterial map={stairsTexture} map-flipY={false} />
+            {/* <meshStandardMaterial map={stairsTexture} map-flipY={false} /> */}
+            <meshMatcapMaterial matcap={matcapTexture} />
           </mesh>
           <mesh
             geometry={(stairs.scene.children[1] as THREE.Mesh).geometry}
@@ -366,7 +375,8 @@ export default function Experience1() {
             rotation={[-0.03, -1.21, 0.05]}
             scale={1.1}
           >
-            <meshStandardMaterial map={stairsTexture} map-flipY={false} />
+            {/* <meshStandardMaterial map={stairsTexture} map-flipY={false} /> */}
+            <meshMatcapMaterial matcap={matcapTexture} />
           </mesh>
           <RoundedBox
             args={[2.3, 1.84, 0.0]}
@@ -402,6 +412,7 @@ export default function Experience1() {
         font="./fonts/Titan_One_Regular.json"
       >
         THE CAPITAL
+        <meshMatcapMaterial matcap={matcapTexture} />
       </Text3D>
     </>
   );
