@@ -10,7 +10,7 @@ import {
 } from "@react-three/drei";
 import Model from "../experience/clayno-ntf-model";
 
-const ClickableMesh = ({ onMeshClick }) => {
+const ClickableMesh = ({ onMeshClick }: { onMeshClick: () => void }) => {
   const groupRef = useRef<THREE.Group | null>(null);
   const trident = useGLTF("./models/trident.glb");
   const [matcapTexture] = useMatcapTexture("A27216_E9D036_D0AB24_DCB927", 256);
@@ -72,28 +72,52 @@ const GuardRex = () => {
       {/* Drei Html component for pop-up window */}
       {isPopupOpen && (
         <Html center>
-          <div className="flex flex-col gap-2 p-4 rounded-xl bg-neutral-800 w-[400px] text-white border-2 border-amber-500">
-            <h2 className="text-xl text-left text-amber-400 font-extrabold justify-start w-full">
+          <div className="flex flex-col gap-2 p-4 rounded-xl bg-zinc-900 w-[400px] text-white border-2 border-amber-500">
+            <h2 className="text-xl text-left text-amber-500 font-extrabold justify-start w-full">
               Enter the Capital
             </h2>
-            <p className="text-md text-left justify-start">
+            <p className="text-md text-left justify-start font-extrabold">
               Rawrrr!! Welcome to the Capital.
             </p>
             <p className="text-md justify-start">
-              The Capital is home to some of the finest Claynosaurz collectors.
+              The Capital is home to some of the finest{" "}
+              <b>
+                <a
+                  className="text-sky-500"
+                  target="_blank"
+                  href="https://claynosaurz.com/"
+                >
+                  Claynosaurz{" "}
+                </a>
+              </b>
+              collectors.
             </p>
             <p className="text-md justify-start">
-              I cannot permit you to enter without at least 25 OG Claynosaurz
-              NFTs or 1 Ancient in your possession.
+              I cannot permit you to enter without at least{" "}
+              <b>
+                25{" "}
+                <a
+                  className="text-sky-500"
+                  href="https://www.tensor.trade/trade/claynosaurz"
+                  target="_blank"
+                >
+                  OG Claynosaurz
+                </a>
+              </b>{" "}
+              or <b>1 Ancient</b> in your possession.
             </p>
             <p className="text-md justify-start">
-              Go forth and collect, then return when you are ready.
+              If you need more information, our elder mystic near the shore may
+              have the answers you seek.
+            </p>
+            <p className="text-md justify-start font-extrabold">
+              Now go forth and collect, then return when you are ready.
             </p>
 
             <div className="flex flex-row w-full justify-end mt-2">
               <button
                 onClick={handleMeshClick}
-                className="bg-amber-500 rounded-lg px-4 py-1 place-self-end"
+                className="bg-amber-600/80 rounded-lg text-lg font-extrabold px-4 py-1 place-self-end border-2 border-amber-600/80 hover:border-amber-500"
               >
                 I accept
               </button>

@@ -18,7 +18,7 @@ import {
   useTexture,
   useMatcapTexture,
   Stars,
-  Sky,
+  // Sky,
 } from "@react-three/drei";
 // import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
@@ -26,6 +26,7 @@ import * as THREE from "three";
 import Model from "./clayno-ntf-model";
 // import { useControls } from "leva";
 import GuardRex from "../components/GuardRex";
+import InfoMystic from "../components/InfoMystic";
 
 const waterMaterial = {
   vertexShader: `uniform float uTime;
@@ -293,7 +294,7 @@ export default function Experience1() {
   return (
     <>
       {/* <Perf position="top-left" /> */}
-      <ambientLight intensity={1} />
+      <ambientLight intensity={0} />
       {/* <pointLight position={[2, 1, -6]} intensity={50} /> */}
       <OrbitControls
         maxDistance={50}
@@ -338,6 +339,8 @@ export default function Experience1() {
       <group>
         {/* Guard Rex */}
         <GuardRex />
+
+        <InfoMystic />
 
         {/* Lookout Bronto */}
         <group scale={1.5} position={[5.5, 2.65, 5]}>
@@ -400,8 +403,8 @@ export default function Experience1() {
             rotation={[-0.42, 6.62, 0.13]}
           >
             <MeshPortalMaterial>
-              <ambientLight intensity={0} />
-              <Environment preset="sunset" />
+              <ambientLight intensity={2} />
+              {/* <Environment preset="sunset" /> */}
               <mesh rotation={[0, Math.PI / 2, 0]} position={[0, 1, 0]}>
                 <sphereGeometry args={[2.2, 64, 64]} />
                 <meshStandardMaterial map={map} side={THREE.BackSide} />
