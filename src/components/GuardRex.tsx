@@ -72,7 +72,7 @@ const GuardRex = () => {
       {/* Drei Html component for pop-up window */}
       {isPopupOpen && (
         <Html center>
-          <div className="flex flex-col gap-2 p-4 rounded-xl bg-zinc-900 w-[400px] text-white border-2 border-amber-500">
+          <div className="flex flex-col gap-2 p-4 rounded-xl bg-zinc-900 w-11/12 md:w-[400px] text-white border-2 border-amber-500">
             <h2 className="text-xl text-left text-amber-500 font-extrabold justify-start w-full">
               Enter the Capital
             </h2>
@@ -107,8 +107,8 @@ const GuardRex = () => {
               or <b>1 Ancient</b> in your possession.
             </p>
             <p className="text-md justify-start">
-              If you need more information, our elder mystic near the shore may
-              have the answers you seek.
+              If you need more information, our elder mystic may have the
+              answers you seek.
             </p>
             <p className="text-md justify-start font-extrabold">
               Now go forth and collect, then return when you are ready.
