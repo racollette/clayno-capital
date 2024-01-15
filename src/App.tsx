@@ -7,7 +7,7 @@ import { Loader } from "@react-three/drei";
 function App() {
   return (
     <>
-      <Canvas shadows camera={{ position: [0, 0, 10], fov: 30 }}>
+      <Canvas shadows camera={{ position: [-7, 12, 27.5], fov: 30 }}>
         <color attach="background" args={["black"]} />
         <Suspense fallback={null}>
           <Experience1 />
