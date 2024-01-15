@@ -264,13 +264,13 @@ export default function Experience1() {
     }
   });
 
-  const { perfVisible } = useControls({
-    perfVisible: false,
-  });
+  // const { perfVisible } = useControls({
+  //   perfVisible: false,
+  // });
 
   return (
     <>
-      {perfVisible && <Perf position="top-left" />}
+      {/* {perfVisible && <Perf position="top-left" />} */}
       <ambientLight intensity={1} />
       {/* <pointLight position={[2, 1, -6]} intensity={50} /> */}
       <OrbitControls
