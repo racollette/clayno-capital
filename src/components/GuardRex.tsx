@@ -23,7 +23,7 @@ const ClickableMesh = ({ onMeshClick }: { onMeshClick: () => void }) => {
       ref={groupRef}
       onClick={onMeshClick}
       scale={0.9}
-      position={[-1.7, 2.4, 1.35]}
+      position={[-1.7, 2.5, 1.35]}
       rotation={[0, 0.2, 0]}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}

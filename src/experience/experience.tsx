@@ -187,15 +187,15 @@ const waterMaterial = {
 export default function Experience1() {
   const boxControls = useControls("box", {
     position: {
-      value: { x: 0.29, y: 1.6, z: 1.86 },
+      value: { x: 0.3, y: -0.27, z: 1.89 },
       step: 0.01,
     },
     rotation: {
-      value: { x: -0.42, y: 6.62, z: 0.13 },
+      value: { x: -0.49, y: 6.57, z: 0.16 },
       step: 0.01,
     },
     args: {
-      value: [2.3, 1.84, 0.0],
+      value: [2.37, 2.06, 0.0],
       step: 0.01,
     },
   });
@@ -245,6 +245,7 @@ export default function Experience1() {
   const map = useTexture(
     "./textures/Dreamlike_equirectangular-jpg_Subterranean_city_active_volcano_1969036910_9914188-min.jpg"
   );
+  const starfield = useTexture("./textures/plain_starfield_2-min.png");
   const oceanRef = useRef<THREE.Mesh<
     THREE.PlaneGeometry,
     THREE.ShaderMaterial
@@ -253,6 +254,7 @@ export default function Experience1() {
   const stegoRef = useRef<THREE.Group | null>(null);
   const ankyloRef = useRef<THREE.Group | null>(null);
   const terrainRef = useRef<THREE.Mesh | null>(null);
+  const starsRef = useRef();
 
   const stegoHeight = 1.25;
   const ankyloHeight = 1.25;
@@ -296,16 +298,17 @@ export default function Experience1() {
   return (
     <>
       {/* <Perf position="top-left" /> */}
-      <ambientLight intensity={3} />
-      {/* <pointLight position={[2, 1, -6]} intensity={50} /> */}
+      <ambientLight intensity={3.5} />
+      <pointLight position={[-4, 1, -1]} intensity={10} />
       <OrbitControls
-        maxDistance={50}
-        minDistance={15}
-        maxPolarAngle={1.4}
-        minPolarAngle={0.1}
-        target={[0, 0, 0]}
+      // maxDistance={50}
+      // minDistance={15}
+      // maxPolarAngle={1.4}
+      // minPolarAngle={0.1}
+      // target={[0, 0, 0]}
       />
-      {/* <Stars
+      <Stars
+        ref={starsRef}
         radius={100}
         depth={50}
         count={5000}
@@ -313,7 +316,8 @@ export default function Experience1() {
         saturation={0}
         fade
         speed={1.5}
-      /> */}
+        position={[0, 0, 0]}
+      />
       {/* <Sky
         distance={450000}
         sunPosition={[0, 1, 0]}
@@ -345,7 +349,7 @@ export default function Experience1() {
         <InfoMystic />
 
         {/* Lookout Bronto */}
-        <group scale={1.5} position={[5.5, 2.65, 5]}>
+        <group scale={1.5} position={[5.5, 2.55, 5]}>
           <Model modelName="bronto-idle-bored" nftId="8006" />
         </group>
 
@@ -383,7 +387,7 @@ export default function Experience1() {
           </mesh>
           <mesh
             geometry={(stairs.scene.children[0] as THREE.Mesh).geometry}
-            position={[-0.475, -3.41, -0.0]}
+            position={[-0.505, -3.71, -0.0]}
             rotation={[1.61, 0.92, -0.49]}
             scale={1.1}
           >
@@ -428,13 +432,18 @@ export default function Experience1() {
         </group>
       </group>
 
+      <mesh>
+        <sphereGeometry args={[50, 64, 64]} />
+        <meshStandardMaterial map={starfield} side={THREE.BackSide} />
+      </mesh>
+
       <mesh
         ref={oceanRef}
         rotation={[-Math.PI * 0.5, 0, 0]}
         scale={1}
         position={[0, -1, 0]}
       >
-        <planeGeometry args={[60, 60, 512, 512]} />
+        <planeGeometry args={[100, 100, 512, 512]} />
 
         <shaderMaterial attach="material" args={[waterMaterial]} />
       </mesh>

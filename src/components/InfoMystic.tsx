@@ -25,7 +25,7 @@ const ClickableMesh = ({ onMeshClick }: ClickableMeshProps) => {
       ref={groupRef}
       onClick={onMeshClick}
       scale={1.2}
-      position={[-6, 2.4, 5.35]}
+      position={[-5, 2.35, 4.5]}
       rotation={[0, -1.7, 0]}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
@@ -75,29 +75,29 @@ const InfoMystic = () => {
       {isPopupOpen && (
         <Html center>
           <div className="w-screen flex justify-center">
-            <div className="flex flex-col gap-4 p-4 rounded-xl bg-zinc-900 w-11/12 md:w-[500px] text-white border-2 border-indigo-500">
-              <h2 className="text-xl text-left text-indigo-400/90 font-extrabold justify-start w-full">
+            <div className="flex flex-col gap-4 p-4 rounded-xl bg-zinc-900 w-11/12 md:w-[500px] text-white border-2 border-sky-500">
+              <h2 className="text-xl text-left text-sky-500 font-extrabold justify-start w-full">
                 Frequently Asked Questions
               </h2>
-              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
                 What are the benefits of being in Clayno Capital?
               </p>
-              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
                 Who are the other members?
               </p>
-              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
                 How do I join?
               </p>
-              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
                 What else does Clayno Capital do?
               </p>
-              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
                 How can I contact the Capital?
               </p>
               <div className="flex flex-row w-full justify-end mt-2">
                 <button
                   onClick={handleMeshClick}
-                  className="bg-indigo-600 rounded-lg font-bold px-4 py-1 place-self-end border-2 border-indigo-600 hover:border-indigo-400"
+                  className="bg-sky-600 rounded-lg font-bold px-4 py-1 place-self-end border-2 border-sky-600 hover:border-sky-400"
                 >
                   I'm done here
                 </button>
