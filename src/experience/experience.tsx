@@ -22,7 +22,7 @@ import {
   // Float,
   // Sky,
 } from "@react-three/drei";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import Model from "./clayno-ntf-model";
@@ -185,20 +185,20 @@ const waterMaterial = {
 };
 
 export default function Experience1() {
-  const boxControls = useControls("box", {
-    position: {
-      value: { x: 0.3, y: -0.27, z: 1.89 },
-      step: 0.01,
-    },
-    rotation: {
-      value: { x: -0.49, y: 6.57, z: 0.16 },
-      step: 0.01,
-    },
-    args: {
-      value: [2.37, 2.06, 0.0],
-      step: 0.01,
-    },
-  });
+  // const boxControls = useControls("box", {
+  //   position: {
+  //     value: { x: 0.3, y: -0.27, z: 1.89 },
+  //     step: 0.01,
+  //   },
+  //   rotation: {
+  //     value: { x: -0.49, y: 6.57, z: 0.16 },
+  //     step: 0.01,
+  //   },
+  //   args: {
+  //     value: [2.37, 2.06, 0.0],
+  //     step: 0.01,
+  //   },
+  // });
 
   // const stegoControls = useControls("stego", {
   //   position: {
@@ -300,11 +300,11 @@ export default function Experience1() {
       <ambientLight intensity={3.5} />
       <pointLight position={[-4, 1, -1]} intensity={10} />
       <OrbitControls
-      // maxDistance={50}
-      // minDistance={15}
-      // maxPolarAngle={1.4}
-      // minPolarAngle={0.1}
-      // target={[0, 0, 0]}
+        maxDistance={50}
+        minDistance={15}
+        maxPolarAngle={1.4}
+        minPolarAngle={0.1}
+        target={[0, 0, 0]}
       />
       {/* <Stars
         radius={100}
@@ -401,21 +401,9 @@ export default function Experience1() {
             <meshMatcapMaterial matcap={matcapTexture} />
           </mesh>
           <RoundedBox
-            args={[
-              boxControls.args[0],
-              boxControls.args[1],
-              boxControls.args[2],
-            ]}
-            position={[
-              boxControls.position.x,
-              boxControls.position.y,
-              boxControls.position.z,
-            ]}
-            rotation={[
-              boxControls.rotation.x,
-              boxControls.rotation.y,
-              boxControls.rotation.z,
-            ]}
+            position={[0.3, -0.27, 1.89]}
+            rotation={[-0.49, 6.57, 0.16]}
+            args={[2.37, 2.06, 0.0]}
           >
             <MeshPortalMaterial>
               <ambientLight intensity={3} />

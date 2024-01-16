@@ -74,7 +74,7 @@ const InfoMystic = () => {
       {/* Drei Html component for pop-up window */}
       {isPopupOpen && (
         <Html center>
-          <div className="w-screen flex justify-center">
+          <div className="w-screen flex justify-center items-center">
             <div className="flex flex-col gap-4 p-4 rounded-xl bg-zinc-900 w-11/12 md:w-[500px] text-white border-2 border-sky-500">
               <h2 className="text-xl text-left text-sky-500 font-extrabold justify-start w-full">
                 Frequently Asked Questions
