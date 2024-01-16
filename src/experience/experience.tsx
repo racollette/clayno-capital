@@ -17,9 +17,9 @@ import {
   useGLTF,
   useTexture,
   useMatcapTexture,
-  Stars,
-  Sparkles,
-  Float,
+  // Stars,
+  // Sparkles,
+  // Float,
   // Sky,
 } from "@react-three/drei";
 import { useControls } from "leva";
@@ -254,7 +254,6 @@ export default function Experience1() {
   const stegoRef = useRef<THREE.Group | null>(null);
   const ankyloRef = useRef<THREE.Group | null>(null);
   const terrainRef = useRef<THREE.Mesh | null>(null);
-  const starsRef = useRef();
 
   const stegoHeight = 1.25;
   const ankyloHeight = 1.25;
@@ -307,8 +306,7 @@ export default function Experience1() {
       // minPolarAngle={0.1}
       // target={[0, 0, 0]}
       />
-      <Stars
-        ref={starsRef}
+      {/* <Stars
         radius={100}
         depth={50}
         count={5000}
@@ -316,8 +314,7 @@ export default function Experience1() {
         saturation={0}
         fade
         speed={1.5}
-        position={[0, 0, 0]}
-      />
+      /> */}
       {/* <Sky
         distance={450000}
         sunPosition={[0, 1, 0]}

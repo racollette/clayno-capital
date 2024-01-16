@@ -2,7 +2,7 @@
 import { Canvas } from "@react-three/fiber";
 import Experience1 from "./experience/experience";
 import { Suspense } from "react";
-import { Loader, Preload } from "@react-three/drei";
+import { Loader } from "@react-three/drei";
 
 function App() {
   return (
