@@ -2,7 +2,7 @@
 import { Canvas } from "@react-three/fiber";
 import Experience1 from "./experience/experience";
 import { Suspense } from "react";
-import { Loader } from "@react-three/drei";
+import { Loader, Preload } from "@react-three/drei";
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
         <color attach="background" args={["black"]} />
         <Suspense fallback={null}>
           <Experience1 />
+          {/* <Preload all /> */}
         </Suspense>
       </Canvas>
       <Loader />

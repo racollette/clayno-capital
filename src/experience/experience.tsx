@@ -18,9 +18,11 @@ import {
   useTexture,
   useMatcapTexture,
   Stars,
+  Sparkles,
+  Float,
   // Sky,
 } from "@react-three/drei";
-// import { useControls } from "leva";
+import { useControls } from "leva";
 // import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import Model from "./clayno-ntf-model";
@@ -183,20 +185,20 @@ const waterMaterial = {
 };
 
 export default function Experience1() {
-  // const boxControls = useControls("box", {
-  //   position: {
-  //     value: { x: 0.29, y: 1.6, z: 1.86 },
-  //     step: 0.01,
-  //   },
-  //   rotation: {
-  //     value: { x: -0.42, y: 6.62, z: 0.13 },
-  //     step: 0.01,
-  //   },
-  //   args: {
-  //     value: [2.3, 1.84, 0.0],
-  //     step: 0.01,
-  //   },
-  // });
+  const boxControls = useControls("box", {
+    position: {
+      value: { x: 0.29, y: 1.6, z: 1.86 },
+      step: 0.01,
+    },
+    rotation: {
+      value: { x: -0.42, y: 6.62, z: 0.13 },
+      step: 0.01,
+    },
+    args: {
+      value: [2.3, 1.84, 0.0],
+      step: 0.01,
+    },
+  });
 
   // const stegoControls = useControls("stego", {
   //   position: {
@@ -227,13 +229,13 @@ export default function Experience1() {
   // C8D1DC_575B62_818892_6E747B
   // C7C7D7_4C4E5A_818393_6C6C74
 
-  const terrain = useGLTF("./models/terrain1.glb");
-  const terrainTexture = useTexture("./textures/terrain_texture1.jpg");
-  terrainTexture.flipY = false;
+  const terrain = useGLTF("./models/terrain2.glb");
+  const terrainTexture = useTexture("./textures/terrain_texture2.jpg");
+  // terrainTexture.flipY = false;
   // terrain.scene.children[0].position.x = 5;
 
-  const volcano = useGLTF("./models/volcano1.glb");
-  const volcanoTexture = useTexture("./textures/volcano_texture1.jpg");
+  const volcano = useGLTF("./models/volcano2.glb");
+  const volcanoTexture = useTexture("./textures/volcano_texture2.jpg");
   volcanoTexture.flipY = false;
 
   const stairs = useGLTF("./models/stairs.glb");
@@ -294,7 +296,7 @@ export default function Experience1() {
   return (
     <>
       {/* <Perf position="top-left" /> */}
-      <ambientLight intensity={0} />
+      <ambientLight intensity={3} />
       {/* <pointLight position={[2, 1, -6]} intensity={50} /> */}
       <OrbitControls
         maxDistance={50}
@@ -303,7 +305,7 @@ export default function Experience1() {
         minPolarAngle={0.1}
         target={[0, 0, 0]}
       />
-      <Stars
+      {/* <Stars
         radius={100}
         depth={50}
         count={5000}
@@ -311,7 +313,7 @@ export default function Experience1() {
         saturation={0}
         fade
         speed={1.5}
-      />
+      /> */}
       {/* <Sky
         distance={450000}
         sunPosition={[0, 1, 0]}
@@ -322,7 +324,7 @@ export default function Experience1() {
         preset="sunset"
         // background
         // ground
-        // files="./environments/kloofendal_overcast_puresky_2k.hdr"
+        // files="./environments/Sky_Dome_hdri-hdr_VR360_view_of_a_1335399463_9928371.hdr"
         // files="./environments/Fantasy_equirectangular-jpg_VR360_view_of_molten_670336408_9869197.jpg"
       />
 
@@ -366,22 +368,22 @@ export default function Experience1() {
         <mesh
           ref={terrainRef}
           geometry={(terrain.scene.children[0] as THREE.Mesh).geometry}
-          rotation={[0, Math.PI, 0]}
+          rotation={[0, 2.05, 0]}
         >
           <meshStandardMaterial map={terrainTexture} map-flipY={false} />
         </mesh>
 
-        <group position={[-1, 0, -2]}>
+        <group position={[-1, 2, -2]}>
           <mesh
             geometry={(volcano.scene.children[0] as THREE.Mesh).geometry}
-            position={[-0.9, 0.32, -0.63]}
-            rotation={[0.23, 4.97, 0.2]}
+            position={[-0.7, 0.02, -0.63]}
+            rotation={[0, 3.55, 0]}
           >
             <meshStandardMaterial map={volcanoTexture} map-flipY={false} />
           </mesh>
           <mesh
             geometry={(stairs.scene.children[0] as THREE.Mesh).geometry}
-            position={[-0.55, -2.01, -0.08]}
+            position={[-0.475, -3.41, -0.0]}
             rotation={[1.61, 0.92, -0.49]}
             scale={1.1}
           >
@@ -390,7 +392,7 @@ export default function Experience1() {
           </mesh>
           <mesh
             geometry={(stairs.scene.children[1] as THREE.Mesh).geometry}
-            position={[1.34, -0.34, 4.95]}
+            position={[1.34, -2.24, 4.95]}
             rotation={[-0.03, -1.21, 0.05]}
             scale={1.1}
           >
@@ -398,12 +400,24 @@ export default function Experience1() {
             <meshMatcapMaterial matcap={matcapTexture} />
           </mesh>
           <RoundedBox
-            args={[2.3, 1.84, 0.0]}
-            position={[0.29, 1.6, 1.86]}
-            rotation={[-0.42, 6.62, 0.13]}
+            args={[
+              boxControls.args[0],
+              boxControls.args[1],
+              boxControls.args[2],
+            ]}
+            position={[
+              boxControls.position.x,
+              boxControls.position.y,
+              boxControls.position.z,
+            ]}
+            rotation={[
+              boxControls.rotation.x,
+              boxControls.rotation.y,
+              boxControls.rotation.z,
+            ]}
           >
             <MeshPortalMaterial>
-              <ambientLight intensity={2} />
+              <ambientLight intensity={3} />
               {/* <Environment preset="sunset" /> */}
               <mesh rotation={[0, Math.PI / 2, 0]} position={[0, 1, 0]}>
                 <sphereGeometry args={[2.2, 64, 64]} />
