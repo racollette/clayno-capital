@@ -74,32 +74,34 @@ const InfoMystic = () => {
       {/* Drei Html component for pop-up window */}
       {isPopupOpen && (
         <Html center>
-          <div className="flex flex-col gap-4 p-4 rounded-xl bg-zinc-900 w-11/12 md:w-[500px] text-white border-2 border-indigo-500">
-            <h2 className="text-xl text-left text-indigo-400/90 font-extrabold justify-start w-full">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
-              What are the benefits of being in Clayno Capital?
-            </p>
-            <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
-              Who are the other members?
-            </p>
-            <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
-              How do I join?
-            </p>
-            <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
-              What else does Clayno Capital do?
-            </p>
-            <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
-              How can I contact the Capital?
-            </p>
-            <div className="flex flex-row w-full justify-end mt-2">
-              <button
-                onClick={handleMeshClick}
-                className="bg-indigo-600 rounded-lg font-bold px-4 py-1 place-self-end border-2 border-indigo-600 hover:border-indigo-400"
-              >
-                I'm done here
-              </button>
+          <div className="w-screen flex justify-center">
+            <div className="flex flex-col gap-4 p-4 rounded-xl bg-zinc-900 w-11/12 md:w-[500px] text-white border-2 border-indigo-500">
+              <h2 className="text-xl text-left text-indigo-400/90 font-extrabold justify-start w-full">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+                What are the benefits of being in Clayno Capital?
+              </p>
+              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+                Who are the other members?
+              </p>
+              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+                How do I join?
+              </p>
+              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+                What else does Clayno Capital do?
+              </p>
+              <p className="text-md text-left font-semibold justify-start border-2 border-indigo-500 p-3 rounded-lg">
+                How can I contact the Capital?
+              </p>
+              <div className="flex flex-row w-full justify-end mt-2">
+                <button
+                  onClick={handleMeshClick}
+                  className="bg-indigo-600 rounded-lg font-bold px-4 py-1 place-self-end border-2 border-indigo-600 hover:border-indigo-400"
+                >
+                  I'm done here
+                </button>
+              </div>
             </div>
           </div>
         </Html>
