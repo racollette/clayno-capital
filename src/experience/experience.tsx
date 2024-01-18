@@ -29,6 +29,7 @@ import Model from "./clayno-ntf-model";
 // import { useControls } from "leva";
 import GuardRex from "../components/GuardRex";
 import InfoMystic from "../components/InfoMystic";
+import FlyingDactyl from "../components/FlyingDactyl";
 
 const waterMaterial = {
   vertexShader: `uniform float uTime;
@@ -351,6 +352,8 @@ export default function Experience1() {
           setControlsEnabled={setOrbitControlsEnabled}
         />
 
+        <FlyingDactyl />
+
         {/* Lookout Bronto */}
         <group scale={1.5} position={[5.5, 2.55, 5]}>
           <Model modelName="bronto-idle-bored" nftId="8006" />
@@ -363,10 +366,10 @@ export default function Experience1() {
           rotation={[0, 6, 0]}
           scale={0.8}
         >
-          <Model modelName="stego-trot-excited" nftId="5592" />
+          <Model modelName="stego-trot-excited" nftId="9628" />
         </group>
         <group ref={ankyloRef} scale={0.8}>
-          <Model modelName="ankylo-gallop-excited" nftId="5708" />
+          <Model modelName="ankylo-gallop-excited" nftId="6752" />
         </group>
       </group>
 

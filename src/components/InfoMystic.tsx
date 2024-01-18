@@ -35,7 +35,7 @@ const ClickableMesh = ({ onMeshClick }: ClickableMeshProps) => {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
-      <Model modelName="trice-idle-bored" nftId="277" />
+      <Model modelName="trice-idle-smug" nftId="277" />
       {/* <primitive
         object={trident.scene}
         position={[0.39, -1.51, 0.13]}
@@ -78,7 +78,6 @@ const InfoMystic = ({ controlsEnabled, setControlsEnabled }) => {
   const map = useGLTF("./models/map.glb");
 
   const handleMeshClick = () => {
-    console.log("?????????????");
     // Convert the world coordinates to screen coordinates
     // const screenPosition = new THREE.Vector3();
     // screenPosition.copy(event.object.position);
@@ -91,7 +90,7 @@ const InfoMystic = ({ controlsEnabled, setControlsEnabled }) => {
     // // Set the position of the plane in the center of the screen
     // setPopupPosition({ x: xCoord, y: yCoord, z: 0 });
     camera.position.set(-7.5, 8, 24);
-    setControlsEnabled(!controlsEnabled);
+    // setControlsEnabled(!controlsEnabled);
     // camera.lookAt(
     //   mapRef.current?.position.x,
     //   mapRef.current?.position.y,
@@ -116,58 +115,42 @@ const InfoMystic = ({ controlsEnabled, setControlsEnabled }) => {
           rotation={[Math.PI / 2, Math.PI, 0]}
           scale={1}
         >
-          <mesh geometry={(map.scene.children[0] as THREE.Mesh).geometry}>
-            {/* <boxGeometry args={[100, 100]} /> */}
+          {/* <mesh geometry={(map.scene.children[0] as THREE.Mesh).geometry}>
+            <boxGeometry args={[100, 100]} />
             <meshBasicMaterial color="orange" />
-          </mesh>
+          </mesh> */}
+          <primitive object={map.scene} />
           <Html position={[2, 0, -2]} rotation={[2, 0, 0]}>
-            <div className="absolute top-1/2 left-1/2 text-white text-2xl bg-red-500">
-              Hello
+            <div className="flex flex-col gap-4 p-4 rounded-xl w-11/12 md:w-[500px] text-white">
+              <h2 className="text-xl text-left text-sky-500 font-extrabold justify-start w-full">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
+                What are the benefits of being in Clayno Capital?
+              </p>
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
+                Who are the other members?
+              </p>
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
+                How do I join?
+              </p>
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
+                What else does Clayno Capital do?
+              </p>
+              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
+                How can I contact the Capital?
+              </p>
+              <div className="flex flex-row w-full justify-end mt-2">
+                <button
+                  onClick={handleMeshClick}
+                  className="bg-sky-600 rounded-lg font-bold px-4 py-1 place-self-end border-2 border-sky-600 hover:border-sky-400"
+                >
+                  I'm done here
+                </button>
+              </div>
             </div>
           </Html>
         </group>
-        // <Html
-        //   center
-        //   material={
-        //     <meshStandardMaterial
-        //       side={THREE.DoubleSide}
-        //       opacity={0.5}
-        //       // map={map}
-        //     />
-        //   }
-        // >
-        //   <div className="h-[100px] w-[100px]">Hello???</div>
-        //   {/* <div className="w-screen flex justify-center items-center">
-        //   <div className="flex flex-col gap-4 p-4 rounded-xl bg-zinc-900 w-11/12 md:w-[500px] text-white border-2 border-sky-500">
-        //     <h2 className="text-xl text-left text-sky-500 font-extrabold justify-start w-full">
-        //       Frequently Asked Questions
-        //     </h2>
-        //     <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-        //       What are the benefits of being in Clayno Capital?
-        //     </p>
-        //     <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-        //       Who are the other members?
-        //     </p>
-        //     <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-        //       How do I join?
-        //     </p>
-        //     <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-        //       What else does Clayno Capital do?
-        //     </p>
-        //     <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-        //       How can I contact the Capital?
-        //     </p>
-        //     <div className="flex flex-row w-full justify-end mt-2">
-        //       <button
-        //         onClick={handleMeshClick}
-        //         className="bg-sky-600 rounded-lg font-bold px-4 py-1 place-self-end border-2 border-sky-600 hover:border-sky-400"
-        //       >
-        //         I'm done here
-        //       </button>
-        //     </div>
-        //   </div>
-        // </div> */}
-        // </Html>
       )}
     </>
   );

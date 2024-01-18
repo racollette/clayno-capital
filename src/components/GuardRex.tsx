@@ -28,7 +28,7 @@ const ClickableMesh = ({ onMeshClick }: { onMeshClick: () => void }) => {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
-      <Model modelName="rex-idle-confident" nftId="6069" />
+      <Model modelName="rex-idle-confident" nftId="3495" />
       <primitive
         object={trident.scene}
         position={[0.39, -1.51, 0.13]}
