@@ -7,9 +7,9 @@ import {
   Text3D,
   Float,
   useMatcapTexture,
-  useTexture,
+  // useTexture,
   useGLTF,
-  OrbitControls,
+  // OrbitControls,
 } from "@react-three/drei";
 import Model from "../experience/clayno-ntf-model";
 import { useThree } from "@react-three/fiber";
@@ -61,15 +61,18 @@ const ClickableMesh = ({ onMeshClick }: ClickableMeshProps) => {
   );
 };
 
-const InfoMystic = ({ controlsEnabled, setControlsEnabled }) => {
+const InfoMystic = ({
+  controlsEnabled,
+  setControlsEnabled,
+}: {
+  controlsEnabled: boolean;
+  setControlsEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const mapRef = useRef<THREE.Group | null>(null);
-  const { camera, gl } = useThree();
+  const { camera } = useThree();
   console.log(camera);
   // const [popupPosition, setPopupPosition] = useState({ x: 6, y: 3, z: 2 });
   const [isPopupOpen, setPopupOpen] = useState(false);
-
-  const controls = useRef<OrbitControls | null>(null);
-  const enableControls = !isPopupOpen;
 
   // const handleMeshClick = () => {
   //   setPopupOpen(!isPopupOpen);
@@ -90,7 +93,7 @@ const InfoMystic = ({ controlsEnabled, setControlsEnabled }) => {
     // // Set the position of the plane in the center of the screen
     // setPopupPosition({ x: xCoord, y: yCoord, z: 0 });
     camera.position.set(-7.5, 8, 24);
-    // setControlsEnabled(!controlsEnabled);
+    setControlsEnabled(!controlsEnabled);
     // camera.lookAt(
     //   mapRef.current?.position.x,
     //   mapRef.current?.position.y,
