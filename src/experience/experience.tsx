@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import {
   Environment,
@@ -222,6 +222,8 @@ export default function Experience1() {
   //   },
   // });
 
+  const [orbitControlsEnabled, setOrbitControlsEnabled] = useState(true);
+
   const [matcapTexture] = useMatcapTexture("593E2C_E5D8A9_BC9F79_9F8A68", 256);
 
   // 63584B_E6E0D6_A8A092_BFB6A8
@@ -305,6 +307,7 @@ export default function Experience1() {
         maxPolarAngle={1.4}
         minPolarAngle={0.1}
         target={[0, 0, 0]}
+        enabled={orbitControlsEnabled}
       />
       {/* <Stars
         radius={100}
@@ -343,7 +346,10 @@ export default function Experience1() {
         {/* Guard Rex */}
         <GuardRex />
 
-        <InfoMystic />
+        <InfoMystic
+          controlsEnabled={orbitControlsEnabled}
+          setControlsEnabled={setOrbitControlsEnabled}
+        />
 
         {/* Lookout Bronto */}
         <group scale={1.5} position={[5.5, 2.55, 5]}>
