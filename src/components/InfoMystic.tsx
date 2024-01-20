@@ -79,7 +79,7 @@ const InfoMystic = () => {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 md:gap-3 rounded-xl w-3/5 text-black font-pangolin">
               {pageNumber === 0 ? (
                 <>
-                  <h2 className="text-xl m:text-3xl mb-0 md:mb-2 text-left text-cyan-600 font-extrabold justify-start w-full">
+                  <h2 className="text-lg m:text-3xl mb-0 md:mb-2 text-left text-cyan-600 font-extrabold justify-start w-full">
                     The Scroll of Enlightenment
                   </h2>
                   {FAQ_PROMPTS.map((prompt) => (
@@ -88,7 +88,7 @@ const InfoMystic = () => {
                       onClick={() => setPageNumber(prompt.id)}
                       className="cursor-pointer hover:scale-110"
                     >
-                      <p className="text-md md:text-lg text-left font-semibold justify-start">
+                      <p className="text-sm md:text-lg text-left font-semibold justify-start">
                         {prompt.id}. {prompt.question}
                       </p>
                     </div>
