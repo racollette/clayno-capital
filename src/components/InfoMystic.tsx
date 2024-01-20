@@ -76,7 +76,7 @@ const InfoMystic = () => {
               alt="Parchment"
               className="w-full"
             ></img>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-3 rounded-xl w-3/5 text-black font-grape">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-3 rounded-xl w-3/5 text-black font-pangolin">
               {pageNumber === 0 ? (
                 <>
                   <h2 className="text-3xl mb-2 text-left text-cyan-600 font-extrabold justify-start w-full">
