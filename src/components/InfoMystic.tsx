@@ -122,7 +122,10 @@ const InfoMystic = () => {
                       />
                     </button>
                     <button
-                      onClick={handleMeshClick}
+                      onClick={() => {
+                        setPageNumber(0);
+                        handleMeshClick();
+                      }}
                       className="font-bold text-xl px-4 py-1 hover:underline underline-offset-2"
                     >
                       I'm done here

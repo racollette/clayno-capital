@@ -9,12 +9,16 @@ export const FAQ_PROMPTS = [
         </p>
         <ul>
           <li>
-            • Access to the CC private telegram, which includes many of the team
-            members
+            • Access to the CC private telegram, which includes many of the
+            Claynosaurz core members
           </li>
-          <li>• Presale and whitelist opportunities</li>
           <li>
-            • VIP access to Claynosaurz public events and CC-only private events
+            • Presale and whitelist opportunities from our in-house collab
+            managers
+          </li>
+          <li>
+            • VIP access to Claynosaurz public events as well as CC-only private
+            events
           </li>
         </ul>
       </div>
@@ -25,16 +29,14 @@ export const FAQ_PROMPTS = [
     question: "What else does Clayno Capital do?",
     answer: (
       <div className="flex flex-col gap-2">
-        <p>
-          Clayno Capital aims to be the high-end collectors arm of Claynosaurz.
-        </p>
+        <p>Clayno Capital is the high-end collectors arm of Claynosaurz.</p>
         <p>
           Our separation from the team allows us to pursue activities that the
-          team cannot, often relating to NFT trading and investing.
+          team cannot, such as those relating to NFT trading and investing.
         </p>
         <p>
           CC is also in the process of building and maintaining its own
-          infrastructure.
+          products, which may generate revenue in the future.
         </p>
       </div>
     ),
@@ -45,13 +47,20 @@ export const FAQ_PROMPTS = [
     answer: (
       <div className="flex flex-col gap-2">
         <p>
-          Clayno Capital simply comprised of dino enjoyors, including some well
-          known individuals from the Solana ecosystem.
+          Clayno Capital is primarily comprised of dino enjoyors, but also
+          includes some well known founders and individuals from the Solana
+          ecosystem.
         </p>
         <p>
-          A full list is maintain at{" "}
-          <a href="https://clayno.club/tribes/cc">clayno.club</a>for
-          transparency.
+          A full list is maintained at{" "}
+          <a
+            href="https://clayno.club/tribes/cc"
+            className="text-sky-500"
+            target="_blank"
+          >
+            clayno.club
+          </a>{" "}
+          for transparency.
         </p>
       </div>
     ),
@@ -63,8 +72,9 @@ export const FAQ_PROMPTS = [
       <div className="flex flex-col gap-2">
         <p>
           CC enforces strict entry requirements through our custom-built
-          verification tooling. Members must prove ownership of their wallets
-          and link at least one social account.
+          verification tooling at <a href="https://clayno.club">clayno.club</a>.
+          Members must prove ownership of their wallets and link at least one
+          social account.
         </p>
         <p>
           Wallets are actively monitored, and members are automatically removed
