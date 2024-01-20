@@ -72,8 +72,15 @@ export const FAQ_PROMPTS = [
       <div className="flex flex-col gap-2">
         <p>
           CC enforces strict entry requirements through our custom-built
-          verification tooling at <a href="https://clayno.club">clayno.club</a>.
-          Members must prove ownership of their wallets and link at least one
+          verification tooling at{" "}
+          <a
+            href="https://clayno.club"
+            target="_blank"
+            className="text-sky-500"
+          >
+            clayno.club
+          </a>
+          . Members must prove ownership of their wallets and link at least one
           social account.
         </p>
         <p>
@@ -90,7 +97,13 @@ export const FAQ_PROMPTS = [
       <div className="flex flex-col gap-2">
         <p>
           For inquiries, please contact us at{" "}
-          <a href="mailto:gfy@clayno.capital">gfy@clayno.capital</a>
+          <a
+            className="text-sky-500"
+            target="_blank"
+            href="mailto:gfy@clayno.capital"
+          >
+            gfy@clayno.capital
+          </a>
         </p>
       </div>
     ),
