@@ -10,11 +10,11 @@ export const FAQ_PROMPTS = [
         <ul>
           <li>
             • Access to the CC private telegram, which includes many of the
-            Claynosaurz core members
+            Claynosaurz core team
           </li>
           <li>
-            • Presale and whitelist opportunities from our in-house collab
-            managers
+            • Presale and whitelist opportunities attained by our in-house
+            collab managers
           </li>
           <li>
             • VIP access to Claynosaurz public events as well as CC-only private
