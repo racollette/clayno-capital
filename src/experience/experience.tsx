@@ -16,7 +16,6 @@ import {
   // PerspectiveCamera,
   useGLTF,
   useTexture,
-  useMatcapTexture,
   // Stars,
   // Sparkles,
   // Float,
