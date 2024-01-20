@@ -71,7 +71,7 @@ const GuardRex = () => {
 
       {isPopupOpen && (
         <Html center className="w-screen flex justify-center items-center">
-          <div className="flex justify-center w-full md:w-2/5 xl:w-1/3 aspect-[5/6] relative">
+          <div className="flex justify-center w-full md:w-4/5 lg:w-3/5 xl:w-1/2 2xl:w-1/3 aspect-[5/6] relative">
             <img
               src="/textures/parchment.png"
               alt="Parchment"
@@ -82,7 +82,7 @@ const GuardRex = () => {
                 Enter the Capital
               </h2>
 
-              <p className="text-sm md:text-xl font-semibold justify-start">
+              <p className="text-sm md:text-lg lg:text-xl font-semibold justify-start">
                 The Capital is home to some of the finest{" "}
                 <b>
                   <a
@@ -95,7 +95,7 @@ const GuardRex = () => {
                 </b>
                 collectors.
               </p>
-              <p className="text-sm md:text-xl justify-start">
+              <p className="text-sm md:text-lg lg:text-xl justify-start">
                 I cannot permit you to enter without at least{" "}
                 <b>
                   25{" "}
@@ -109,17 +109,17 @@ const GuardRex = () => {
                 </b>{" "}
                 or <b>1 Ancient</b> in your possession.
               </p>
-              <p className="text-sm md:text-xl justify-start">
+              <p className="text-sm md:text-lg lg:text-xl  justify-start">
                 If you need more information, our elder mystic may have the
                 answers you seek.
               </p>
-              <p className="text-sm md:text-xl justify-start font-extrabold">
+              <p className="text-sm md:text-lg lg:text-xl  justify-start font-extrabold">
                 Now go forth and collect, then return when you are ready.
               </p>
               <div className="flex flex-row w-full justify-end">
                 <button
                   onClick={handleMeshClick}
-                  className="text-lg md:text-3xl font-extrabold px-2 py-1 flex items-center justify-center hover:underline underline-offset-2"
+                  className="text-lg md:text-xl lg:text-3xl font-extrabold px-2 py-1 flex items-center justify-center hover:underline underline-offset-2"
                 >
                   I accept
                 </button>

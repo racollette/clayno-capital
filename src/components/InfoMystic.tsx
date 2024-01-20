@@ -70,7 +70,7 @@ const InfoMystic = () => {
       <ClickableMesh onMeshClick={handleMeshClick} />
       {isPopupOpen && (
         <Html center className="w-screen flex justify-center items-center">
-          <div className="flex justify-center w-full md:w-2/5 xl:w-1/3 aspect-[5/6] relative">
+          <div className="flex justify-center w-full md:w-4/5 lg:w-3/5 xl:w-1/2 2xl:w-1/3 aspect-[5/6] relative">
             <img
               src="/textures/parchment.png"
               alt="Parchment"
@@ -111,7 +111,7 @@ const InfoMystic = () => {
                     {FAQ_PROMPTS[pageNumber - 1].answer}
                   </div>
 
-                  <div className="flex flex-row w-full justify-between mt-0 md:mt-8">
+                  <div className="flex flex-row w-full justify-between mt-0 md:mt-4">
                     <button onClick={() => setPageNumber(0)}>
                       <img
                         src="/icons/back-arrow.svg"

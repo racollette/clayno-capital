@@ -23,13 +23,13 @@ export const FAQ_PROMPTS = [
             collab managers
           </li>
           <li>
-            • A slot on a airdrop list curated by{" "}
+            • A slot on a airdrop list curated through{" "}
             <a
               href="https://clayno.club/tribes/cc"
               target="_blank"
               className="text-sky-500"
             >
-              clayno.club
+              clayno.club.
             </a>
           </li>
         </ul>
@@ -47,8 +47,16 @@ export const FAQ_PROMPTS = [
           team cannot, such as those relating to NFT trading and investing.
         </p>
         <p>
-          CC is also in the process of building and maintaining its own
-          products, which may generate revenue in the future.
+          CC is also in the process of building and maintaining its own products
+          (such as{" "}
+          <a
+            href="https://clayno.club"
+            target="_blank"
+            className="text-sky-500"
+          >
+            clayno.club
+          </a>
+          ), which may generate revenue in the future.
         </p>
       </div>
     ),
@@ -114,7 +122,19 @@ export const FAQ_PROMPTS = [
             target="_blank"
             href="mailto:gfy@clayno.capital"
           >
-            gfy@clayno.capital
+            gfy@clayno.capital{" "}
+          </a>{" "}
+          or via our socials.
+        </p>
+        <p>
+          Twitter/X:{" "}
+          <a
+            href="https://x.com/clayno_capital"
+            target="_blank"
+            className="text-sky-500"
+          >
+            {" "}
+            @clayno_capital
           </a>
         </p>
       </div>

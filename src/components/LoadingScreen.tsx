@@ -27,13 +27,13 @@ export const LoadingScreen = ({
       startExperience();
       setTimeout(() => {
         setShowExperience(true);
-      }, 5000);
+      }, 6000);
     }
   }, [loadingProgress]);
 
   return (
     <div
-      className={`fixed top-0 left-0 bottom-0 right-0 bg-inherit flex items-center justify-center transition-opacity duration-[5000ms] ${
+      className={`fixed top-0 left-0 bottom-0 right-0 bg-inherit flex items-center justify-center transition-opacity duration-[2000ms] ${
         started && `opacity-0`
       } ${showExperience && `hidden`}`}
     >
