@@ -22,7 +22,16 @@ export const FAQ_PROMPTS = [
             • Presale and whitelist opportunities attained by our in-house
             collab managers
           </li>
-          <li>• A slot on an airdrop list for occassional token allocations</li>
+          <li>
+            • A slot on a airdrop list curated by{" "}
+            <a
+              href="https://clayno.club/tribes/cc"
+              target="_blank"
+              className="text-sky-500"
+            >
+              clayno.club
+            </a>
+          </li>
         </ul>
       </div>
     ),

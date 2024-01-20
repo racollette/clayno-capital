@@ -77,8 +77,8 @@ const GuardRex = () => {
               alt="Parchment"
               className="w-full"
             ></img>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-3 rounded-xl w-3/5 text-black font-pangolin tracking-wider">
-              <h2 className="text-2xl md:text-4xl text-left text-amber-600 font-extrabold justify-start w-full">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 md:gap-3 rounded-xl w-3/5 text-black font-pangolin tracking-wider">
+              <h2 className="text-xl md:text-4xl text-left text-amber-600 font-extrabold justify-start w-full">
                 Enter the Capital
               </h2>
 
@@ -119,7 +119,7 @@ const GuardRex = () => {
               <div className="flex flex-row w-full justify-end">
                 <button
                   onClick={handleMeshClick}
-                  className="text-xl md:text-3xl font-extrabold px-2 py-1 flex items-center justify-center hover:underline underline-offset-2"
+                  className="text-lg md:text-3xl font-extrabold px-2 py-1 flex items-center justify-center hover:underline underline-offset-2"
                 >
                   I accept
                 </button>
