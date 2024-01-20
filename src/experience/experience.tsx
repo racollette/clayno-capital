@@ -223,7 +223,9 @@ export default function Experience1() {
   //   },
   // });
 
-  const [matcapTexture] = useMatcapTexture("593E2C_E5D8A9_BC9F79_9F8A68", 256);
+  const matcapTexture = useTexture(
+    "/textures/593E2C_E5D8A9_BC9F79_9F8A68-256px.png"
+  );
 
   // 63584B_E6E0D6_A8A092_BFB6A8
   //
@@ -240,8 +242,6 @@ export default function Experience1() {
   volcanoTexture.flipY = false;
 
   const stairs = useGLTF("./models/stairs.glb");
-  const stairsTexture = useTexture("./textures/stairs_texture.jpg");
-  stairsTexture.flipY = false;
 
   const map = useTexture(
     "./textures/Dreamlike_equirectangular-jpg_Subterranean_city_active_volcano_1969036910_9914188-min.jpg"
@@ -324,11 +324,8 @@ export default function Experience1() {
         azimuth={0.25}
       /> */}
       <Environment
-        preset="sunset"
-        // background
-        // ground
-        // files="./environments/Sky_Dome_hdri-hdr_VR360_view_of_a_1335399463_9928371.hdr"
-        // files="./environments/Fantasy_equirectangular-jpg_VR360_view_of_molten_670336408_9869197.jpg"
+        // preset="sunset"
+        files="./environments/venice_sunset_1k.hdr"
       />
 
       {/* <mesh ref={planeRef} rotation={[-Math.PI / 2, 0, 0]}>
@@ -390,7 +387,6 @@ export default function Experience1() {
             rotation={[1.61, 0.92, -0.49]}
             scale={1.1}
           >
-            {/* <meshStandardMaterial map={stairsTexture} map-flipY={false} /> */}
             <meshMatcapMaterial matcap={matcapTexture} />
           </mesh>
           <mesh
@@ -399,7 +395,6 @@ export default function Experience1() {
             rotation={[-0.03, -1.21, 0.05]}
             scale={1.1}
           >
-            {/* <meshStandardMaterial map={stairsTexture} map-flipY={false} /> */}
             <meshMatcapMaterial matcap={matcapTexture} />
           </mesh>
           <RoundedBox

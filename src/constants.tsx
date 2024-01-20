@@ -1,3 +1,5 @@
+export const TOTAL_FILES = 58;
+
 export const FAQ_PROMPTS = [
   {
     id: 1,

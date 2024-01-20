@@ -10,10 +10,8 @@ export default {
         grape: ['GrapeNuts', 'sans-serif'],
         condiment: ['Condiment', 'cursive'],
         sil: ['ShadowsIntoLight', 'cursive'],
+        pangolin: ['Pangolin', 'cursive'],
       },
-      backgroundImage: () => ({
-        'parchment': "url('/textures/parchment.png')",
-      }),
     },
   },
   plugins: [],

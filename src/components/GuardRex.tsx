@@ -6,14 +6,16 @@ import {
   useCursor,
   Text3D,
   Float,
-  useMatcapTexture,
+  useTexture,
 } from "@react-three/drei";
 import Model from "../experience/clayno-ntf-model";
 
 const ClickableMesh = ({ onMeshClick }: { onMeshClick: () => void }) => {
   const clickableBoxRef = useRef<THREE.Mesh | null>(null);
   const trident = useGLTF("./models/trident.glb");
-  const [matcapTexture] = useMatcapTexture("A27216_E9D036_D0AB24_DCB927", 256);
+  const matcapTexture = useTexture(
+    "/textures/A27216_E9D036_D0AB24_DCB927-256px.png"
+  );
 
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
