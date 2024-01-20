@@ -78,11 +78,11 @@ const GuardRex = () => {
               className="w-full"
             ></img>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 md:gap-3 rounded-xl w-3/5 text-black font-pangolin tracking-wider">
-              <h2 className="text-xl md:text-4xl text-left text-amber-600 font-extrabold justify-start w-full">
+              <h2 className="text-lg md:text-2xl lg:text-4xl text-left text-amber-600 font-extrabold justify-start w-full">
                 Enter the Capital
               </h2>
 
-              <p className="text-sm md:text-lg lg:text-xl font-semibold justify-start">
+              <p className="text-xs md:text-lg lg:text-xl font-semibold justify-start">
                 The Capital is home to some of the finest{" "}
                 <b>
                   <a
@@ -95,7 +95,7 @@ const GuardRex = () => {
                 </b>
                 collectors.
               </p>
-              <p className="text-sm md:text-lg lg:text-xl justify-start">
+              <p className="text-xs md:text-lg lg:text-xl justify-start">
                 I cannot permit you to enter without at least{" "}
                 <b>
                   25{" "}
@@ -109,11 +109,11 @@ const GuardRex = () => {
                 </b>{" "}
                 or <b>1 Ancient</b> in your possession.
               </p>
-              <p className="text-sm md:text-lg lg:text-xl  justify-start">
+              <p className="text-xs md:text-lg lg:text-xl  justify-start">
                 If you need more information, our elder mystic may have the
                 answers you seek.
               </p>
-              <p className="text-sm md:text-lg lg:text-xl  justify-start font-extrabold">
+              <p className="text-xs md:text-lg lg:text-xl  justify-start font-extrabold">
                 Now go forth and collect, then return when you are ready.
               </p>
               <div className="flex flex-row w-full justify-end">

@@ -104,10 +104,10 @@ const InfoMystic = () => {
                 </>
               ) : (
                 <div className="flex flex-col gap-2 md:gap-4">
-                  <p className="text-md md:text-xl text-left font-semibold justify-start">
+                  <p className="text-sm md:text-xl text-left font-semibold justify-start">
                     {FAQ_PROMPTS[pageNumber - 1].question}
                   </p>
-                  <div className="text-sm md:text-lg">
+                  <div className="text-xs md:text-lg">
                     {FAQ_PROMPTS[pageNumber - 1].answer}
                   </div>
 
