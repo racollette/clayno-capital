@@ -16,3 +16,18 @@ canvas{
   width: 100vw;
   height: 100vh;
 }
+
+@font-face {
+  font-family: 'GrapeNuts';
+  src: url('/fonts/GrapeNuts-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Condiment';
+  src: url('/fonts/Condiment-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'ShadowsIntoLight';
+  src: url('/fonts/ShadowsIntoLight-Regular.ttf') format('truetype');
+}

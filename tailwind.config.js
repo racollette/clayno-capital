@@ -5,7 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        grape: ['GrapeNuts', 'sans-serif'],
+        condiment: ['Condiment', 'cursive'],
+        sil: ['ShadowsIntoLight', 'cursive'],
+      },
+      backgroundImage: () => ({
+        'parchment': "url('/textures/parchment.png')",
+      }),
+    },
   },
   plugins: [],
 }

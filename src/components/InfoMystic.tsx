@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import {
@@ -9,10 +9,13 @@ import {
   useMatcapTexture,
   // useTexture,
   useGLTF,
+  useTexture,
+  useAnimations,
   // OrbitControls,
 } from "@react-three/drei";
 import Model from "../experience/clayno-ntf-model";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
+import { FAQ_PROMPTS } from "../constants";
 
 type ClickableMeshProps = {
   onMeshClick: (event: any) => void;
@@ -21,7 +24,6 @@ type ClickableMeshProps = {
 const ClickableMesh = ({ onMeshClick }: ClickableMeshProps) => {
   const groupRef = useRef<THREE.Group | null>(null);
   const [matcapTexture] = useMatcapTexture("7877EE_D87FC5_75D9C7_1C78C0", 256);
-
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
 
@@ -36,11 +38,6 @@ const ClickableMesh = ({ onMeshClick }: ClickableMeshProps) => {
       onPointerOut={() => setHovered(false)}
     >
       <Model modelName="trice-idle-smug" nftId="277" />
-      {/* <primitive
-        object={trident.scene}
-        position={[0.39, -1.51, 0.13]}
-        rotation={[1.51, 0.32, -0.7]}
-      /> */}
       <Float
         speed={5} // Animation speed, defaults to 1
         rotationIntensity={0.5} // XYZ rotation intensity, defaults to 1
@@ -61,99 +58,81 @@ const ClickableMesh = ({ onMeshClick }: ClickableMeshProps) => {
   );
 };
 
-const InfoMystic = ({
-  controlsEnabled,
-  setControlsEnabled,
-}: {
-  controlsEnabled: boolean;
-  setControlsEnabled: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const mapRef = useRef<THREE.Group | null>(null);
-  const { camera } = useThree();
-  console.log(camera);
-  // const [popupPosition, setPopupPosition] = useState({ x: 6, y: 3, z: 2 });
+const InfoMystic = () => {
   const [isPopupOpen, setPopupOpen] = useState(false);
-
-  // const handleMeshClick = () => {
-  //   setPopupOpen(!isPopupOpen);
-  // };
-
-  const map = useGLTF("./models/map.glb");
+  const [pageNumber, setPageNumber] = useState(0);
 
   const handleMeshClick = () => {
-    // Convert the world coordinates to screen coordinates
-    // const screenPosition = new THREE.Vector3();
-    // screenPosition.copy(event.object.position);
-    // screenPosition.project(camera);
-
-    // // Map the screen coordinates to the 2D space ([-1,1] to [0,1])
-    // const xCoord = (screenPosition.x + 1) / 2;
-    // const yCoord = (-screenPosition.y + 1) / 2;
-
-    // // Set the position of the plane in the center of the screen
-    // setPopupPosition({ x: xCoord, y: yCoord, z: 0 });
-    camera.position.set(-7.5, 8, 24);
-    setControlsEnabled(!controlsEnabled);
-    // camera.lookAt(
-    //   mapRef.current?.position.x,
-    //   mapRef.current?.position.y,
-    //   mapRef.current?.position.z
-    // );
     setPopupOpen(!isPopupOpen);
   };
 
   return (
     <>
-      {/* <ambientLight intensity={0.5} /> */}
-      {/* <pointLight position={[5, 5, 5]} /> */}
-
-      {/* Your 3D scene components go here */}
       <ClickableMesh onMeshClick={handleMeshClick} />
-
-      {/* Drei Html component for pop-up window */}
       {isPopupOpen && (
-        <group
-          ref={mapRef}
-          position={[-2, 6, 12]}
-          rotation={[Math.PI / 2, Math.PI, 0]}
-          scale={1}
-        >
-          {/* <mesh geometry={(map.scene.children[0] as THREE.Mesh).geometry}>
-            <boxGeometry args={[100, 100]} />
-            <meshBasicMaterial color="orange" />
-          </mesh> */}
-          <primitive object={map.scene} />
-          <Html position={[2, 0, -2]} rotation={[2, 0, 0]}>
-            <div className="flex flex-col gap-4 p-4 rounded-xl w-11/12 md:w-[500px] text-white">
-              <h2 className="text-xl text-left text-sky-500 font-extrabold justify-start w-full">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-                What are the benefits of being in Clayno Capital?
-              </p>
-              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-                Who are the other members?
-              </p>
-              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-                How do I join?
-              </p>
-              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-                What else does Clayno Capital do?
-              </p>
-              <p className="text-md text-left font-semibold justify-start border-2 border-sky-500 p-3 rounded-lg">
-                How can I contact the Capital?
-              </p>
-              <div className="flex flex-row w-full justify-end mt-2">
-                <button
-                  onClick={handleMeshClick}
-                  className="bg-sky-600 rounded-lg font-bold px-4 py-1 place-self-end border-2 border-sky-600 hover:border-sky-400"
-                >
-                  I'm done here
-                </button>
-              </div>
+        <Html center className="w-screen flex justify-center items-center">
+          <div className="flex justify-center w-full md:w-2/5 xl:w-1/3 aspect-[5/6] relative">
+            <img
+              src="/textures/parchment.png"
+              alt="Parchment"
+              className="w-full"
+            ></img>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-3 rounded-xl w-3/5 text-black font-grape tracking-wide">
+              {pageNumber === 0 ? (
+                <>
+                  <h2 className="text-3xl mb-2 text-left text-cyan-600 font-extrabold justify-start w-full">
+                    The Scroll of Enlightenment
+                  </h2>
+                  {FAQ_PROMPTS.map((prompt) => (
+                    <div
+                      key={prompt.id}
+                      onClick={() => setPageNumber(prompt.id)}
+                      className="cursor-pointer hover:scale-110"
+                    >
+                      <p className="text-lg text-left font-semibold justify-start">
+                        {prompt.id}. {prompt.question}
+                      </p>
+                    </div>
+                  ))}
+                  <div className="flex flex-row w-full justify-end mt-2">
+                    <button
+                      onClick={handleMeshClick}
+                      className="text-2xl font-bold px-4 py-1 place-self-end hover:underline underline-offset-2"
+                    >
+                      I'm done here
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <p className="text-xl text-left font-semibold justify-start">
+                    {FAQ_PROMPTS[pageNumber - 1].question}
+                  </p>
+                  <div className="text-lg">
+                    {FAQ_PROMPTS[pageNumber - 1].answer}
+                  </div>
+
+                  <div className="flex flex-row w-full justify-between mt-8">
+                    <button onClick={() => setPageNumber(0)}>
+                      <img
+                        src="/icons/back-arrow.svg"
+                        alt="Go back"
+                        width={40}
+                        height={40}
+                      />
+                    </button>
+                    <button
+                      onClick={handleMeshClick}
+                      className="font-bold text-xl px-4 py-1 hover:underline underline-offset-2"
+                    >
+                      I'm done here
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
-          </Html>
-        </group>
+          </div>
+        </Html>
       )}
     </>
   );

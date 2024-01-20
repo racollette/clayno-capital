@@ -345,7 +345,10 @@ export default function Experience1() {
 
       <group>
         {/* Guard Rex */}
-        <GuardRex />
+        <GuardRex
+          controlsEnabled={orbitControlsEnabled}
+          setControlsEnabled={setOrbitControlsEnabled}
+        />
 
         <InfoMystic
           controlsEnabled={orbitControlsEnabled}

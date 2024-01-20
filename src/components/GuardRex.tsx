@@ -7,8 +7,10 @@ import {
   Text3D,
   Float,
   useMatcapTexture,
+  useTexture,
 } from "@react-three/drei";
 import Model from "../experience/clayno-ntf-model";
+import { useThree } from "@react-three/fiber";
 
 const ClickableMesh = ({ onMeshClick }: { onMeshClick: () => void }) => {
   const groupRef = useRef<THREE.Group | null>(null);
@@ -63,24 +65,22 @@ const GuardRex = () => {
 
   return (
     <>
-      {/* <ambientLight intensity={0.5} /> */}
-      {/* <pointLight position={[5, 5, 5]} /> */}
-
-      {/* Your 3D scene components go here */}
       <ClickableMesh onMeshClick={handleMeshClick} />
 
-      {/* Drei Html component for pop-up window */}
       {isPopupOpen && (
-        <Html center>
-          <div className="w-screen flex justify-center">
-            <div className="flex flex-col gap-2 p-4 rounded-xl bg-zinc-900 w-11/12 md:w-[400px] text-white border-2 border-amber-500">
-              <h2 className="text-xl text-left text-amber-500 font-extrabold justify-start w-full">
+        <Html center className="w-screen flex justify-center items-center">
+          <div className="flex justify-center w-full md:w-2/5 xl:w-1/3 aspect-[5/6] relative">
+            <img
+              src="/textures/parchment.png"
+              alt="Parchment"
+              className="w-full"
+            ></img>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-3 rounded-xl w-3/5 text-black font-grape tracking-wider">
+              <h2 className="text-2xl md:text-4xl text-left text-amber-600 font-extrabold justify-start w-full">
                 Enter the Capital
               </h2>
-              <p className="text-md text-left justify-start font-extrabold">
-                Rawrrr!! Welcome to the Capital.
-              </p>
-              <p className="text-md justify-start">
+
+              <p className="text-sm md:text-xl font-semibold justify-start">
                 The Capital is home to some of the finest{" "}
                 <b>
                   <a
@@ -93,7 +93,7 @@ const GuardRex = () => {
                 </b>
                 collectors.
               </p>
-              <p className="text-md justify-start">
+              <p className="text-sm md:text-xl justify-start">
                 I cannot permit you to enter without at least{" "}
                 <b>
                   25{" "}
@@ -107,18 +107,17 @@ const GuardRex = () => {
                 </b>{" "}
                 or <b>1 Ancient</b> in your possession.
               </p>
-              <p className="text-md justify-start">
+              <p className="text-sm md:text-xl justify-start">
                 If you need more information, our elder mystic may have the
                 answers you seek.
               </p>
-              <p className="text-md justify-start font-extrabold">
+              <p className="text-sm md:text-xl justify-start font-extrabold">
                 Now go forth and collect, then return when you are ready.
               </p>
-
-              <div className="flex flex-row w-full justify-end mt-2">
+              <div className="flex flex-row w-full justify-end">
                 <button
                   onClick={handleMeshClick}
-                  className="bg-amber-600/80 rounded-lg text-lg font-extrabold px-4 py-1 place-self-end border-2 border-amber-600/80 hover:border-amber-500"
+                  className="text-xl md:text-3xl font-extrabold px-2 py-1 flex items-center justify-center hover:underline underline-offset-2"
                 >
                   I accept
                 </button>
