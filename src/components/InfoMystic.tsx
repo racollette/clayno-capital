@@ -17,21 +17,23 @@ type ClickableMeshProps = {
 };
 
 const ClickableMesh = ({ onMeshClick }: ClickableMeshProps) => {
-  const groupRef = useRef<THREE.Group | null>(null);
+  const clickableBoxRef = useRef<THREE.Mesh | null>(null);
   const [matcapTexture] = useMatcapTexture("7877EE_D87FC5_75D9C7_1C78C0", 256);
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
 
   return (
-    <group
-      ref={groupRef}
-      onClick={onMeshClick}
-      scale={1.2}
-      position={[-5, 2.35, 4.5]}
-      rotation={[0, -1.7, 0]}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-    >
+    <group scale={1.2} position={[-5, 2.35, 4.5]} rotation={[0, -1.7, 0]}>
+      <mesh
+        ref={clickableBoxRef}
+        onClick={onMeshClick}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+        position={[0, -1.5, 0.25]}
+        visible={false} // Set it invisible
+      >
+        <boxGeometry args={[1, 1.5, 1]} />
+      </mesh>
       <Model modelName="trice-idle-smug" nftId="277" />
       <Float
         speed={5} // Animation speed, defaults to 1

@@ -11,7 +11,7 @@ import {
 import Model from "../experience/clayno-ntf-model";
 
 const ClickableMesh = ({ onMeshClick }: { onMeshClick: () => void }) => {
-  const groupRef = useRef<THREE.Group | null>(null);
+  const clickableBoxRef = useRef<THREE.Mesh | null>(null);
   const trident = useGLTF("./models/trident.glb");
   const [matcapTexture] = useMatcapTexture("A27216_E9D036_D0AB24_DCB927", 256);
 
@@ -19,15 +19,17 @@ const ClickableMesh = ({ onMeshClick }: { onMeshClick: () => void }) => {
   useCursor(hovered);
 
   return (
-    <group
-      ref={groupRef}
-      onClick={onMeshClick}
-      scale={0.9}
-      position={[-1.7, 2.5, 1.35]}
-      rotation={[0, 0.2, 0]}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-    >
+    <group scale={0.9} position={[-1.7, 2.5, 1.35]} rotation={[0, 0.2, 0]}>
+      <mesh
+        ref={clickableBoxRef}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+        onClick={onMeshClick}
+        position={[0, -1, 0.5]}
+        visible={false} // Set it invisible
+      >
+        <boxGeometry args={[1, 2.5, 1]} />
+      </mesh>
       <Model modelName="rex-idle-confident" nftId="3495" />
       <primitive
         object={trident.scene}
