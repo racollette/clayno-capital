@@ -7,10 +7,8 @@ import {
   Text3D,
   Float,
   useMatcapTexture,
-  useTexture,
 } from "@react-three/drei";
 import Model from "../experience/clayno-ntf-model";
-import { useThree } from "@react-three/fiber";
 
 const ClickableMesh = ({ onMeshClick }: { onMeshClick: () => void }) => {
   const groupRef = useRef<THREE.Group | null>(null);

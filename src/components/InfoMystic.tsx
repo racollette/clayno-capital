@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 // import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import {
@@ -7,14 +7,9 @@ import {
   Text3D,
   Float,
   useMatcapTexture,
-  // useTexture,
-  useGLTF,
-  useTexture,
-  useAnimations,
   // OrbitControls,
 } from "@react-three/drei";
 import Model from "../experience/clayno-ntf-model";
-import { useFrame, useThree } from "@react-three/fiber";
 import { FAQ_PROMPTS } from "../constants";
 
 type ClickableMeshProps = {

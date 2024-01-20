@@ -88,7 +88,10 @@ export const FAQ_PROMPTS = [
     question: "How can I contact Clayno Capital?",
     answer: (
       <div className="flex flex-col gap-2">
-        <p>For inquiries, please contact us at</p>
+        <p>
+          For inquiries, please contact us at{" "}
+          <a href="mailto:gfy@clayno.capital">gfy@clayno.capital</a>
+        </p>
       </div>
     ),
   },
