@@ -114,8 +114,9 @@ const InfoMystic = () => {
                       <img
                         src="/icons/back-arrow.svg"
                         alt="Go back"
-                        width={40}
-                        height={40}
+                        width={36}
+                        height={36}
+                        className="hover:scale-110"
                       />
                     </button>
                     <button
