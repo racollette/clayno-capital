@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import Experience1 from "./experience/experience";
 import { Suspense } from "react";
 import { Loader } from "@react-three/drei";
+import { LoadingScreen } from "./components/LoadingScreen";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
           {/* <Preload all /> */}
         </Suspense>
       </Canvas>
-      <Loader />
+      {/* <Loader /> */}
+      <LoadingScreen />
     </>
   );
 }
