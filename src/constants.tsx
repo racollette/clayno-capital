@@ -13,13 +13,14 @@ export const FAQ_PROMPTS = [
             Claynosaurz core team
           </li>
           <li>
-            • Presale and whitelist opportunities attained by our in-house
-            collab managers
-          </li>
-          <li>
             • VIP access to Claynosaurz public events as well as CC-only private
             events
           </li>
+          <li>
+            • Presale and whitelist opportunities attained by our in-house
+            collab managers
+          </li>
+          <li>• A slot on an airdrop list for occassional token allocations</li>
         </ul>
       </div>
     ),
