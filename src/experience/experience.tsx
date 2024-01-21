@@ -399,7 +399,7 @@ export default function Experience1() {
           <RoundedBox
             position={[0.3, -0.27, 1.89]}
             rotation={[-0.49, 6.57, 0.16]}
-            args={[3.25, 2.06, 0.0]}
+            args={[3.15, 2.06, 0.0]}
           >
             <MeshPortalMaterial>
               <ambientLight intensity={3} />
