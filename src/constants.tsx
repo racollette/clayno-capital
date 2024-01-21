@@ -101,7 +101,16 @@ export const FAQ_PROMPTS = [
             clayno.club
           </a>
           . Members must prove ownership of their wallets and link at least one
-          social account.
+          social account to their account. Access to the private Telegram is
+          managed by the{" "}
+          <a
+            href="https://t.me/ClaynoClubBot"
+            target="_blank"
+            className="text-sky-500"
+          >
+            @ClaynoClubBot
+          </a>
+          .
         </p>
         <p>
           Wallets are actively monitored, and members are automatically removed
