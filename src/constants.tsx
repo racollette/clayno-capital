@@ -23,7 +23,7 @@ export const FAQ_PROMPTS = [
             collab managers
           </li>
           <li>
-            • A slot on a airdrop list curated through{" "}
+            • A slot on an airdrop list curated through{" "}
             <a
               href="https://clayno.club/tribes/cc"
               target="_blank"
